@@ -1,8 +1,0 @@
-Project: RedBoxJava
-Team Name: The Brogrammers
-Team Members: Brennan Kelly, Larry Mayes, Trey (John) Ward
-
-Concept Summary:
-RedBoxJava is a program that mimics the functionality of a normal RedBox machine. RedBoxJava allows customers to log in and view available DVD's, BlueRay's, and Video Games available for rent.
-Also, RedBoxJava keeps track of rentals when items are checked out and the fees associated with each rental. RedBoxJava organizes movies and video games by different characteristics in order to let customers search for what they want.
-RedBoxJava has a secure login system, only allowing registered customers to access the catalog. Furthermore, RedBoxJava keeps track of funds on each account and alerts customers of current renals at each log in.
