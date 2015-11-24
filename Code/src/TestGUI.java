@@ -5,6 +5,8 @@ public class TestGUI {
 		// TODO Auto-generated method stub
 
 		  StartGUI myStartGUI = new StartGUI();
+		  myStartGUI.setSceneSize(500, 500);
+	      myStartGUI.setSceneVisible(true);
 	}
 
 }
