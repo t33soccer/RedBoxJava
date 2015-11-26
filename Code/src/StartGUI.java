@@ -33,6 +33,7 @@ public class StartGUI {
         
         JPanel button = new JPanel();
         button.add(getButton());
+        button.add(getButton2());
         panel.add(button);
         return addToParent(panel);
     }
@@ -131,6 +132,19 @@ public class StartGUI {
     				}
     			});
         return submitButton;
+    }
+    
+    private JButton getButton2() {
+    	JButton newUserButton = new JButton("New User?");
+    	newUserButton.addActionListener(new
+    			ActionListener()
+    			{
+    				public void actionPerformed(ActionEvent event)
+    				{
+    					JOptionPane.showMessageDialog(null,"New User");
+    				}
+    			});
+        return newUserButton;        
     }
  
 }
