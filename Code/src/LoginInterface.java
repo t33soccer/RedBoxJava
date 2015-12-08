@@ -1,4 +1,9 @@
 
 public interface LoginInterface {
-//This is a test
+	public String getID();
+	public void setID(String setIDString);
+	public String getPassword();
+	public void setPassword(String setPasswordString);
+	public boolean getAdminRights();
+	public void setAdminRights(boolean setAdminRightsBool);
 }

@@ -1,8 +1,7 @@
 
-public class Movie implements RentableInterface {
-
+public class VideoGame implements RentableInterface {
 	
-	public Movie(String inID, String inTitle, String inType, Double inPrice) {
+	public VideoGame(String inID, String inTitle, String inType, Double inPrice) {
 		this.setID(inID);
 		this.setTitle(inTitle);
 		this.setType(inType);
@@ -59,48 +58,48 @@ public class Movie implements RentableInterface {
 		this.myRentedStatus = setRentedStatus;
 	}
 	
-	public Double getMovieRating(){
-		return this.myMovieRating;
+	public Double getVideoGameRating(){
+		return this.videoGameRating;
 	}
 	
-	public void setMovieRating(Double setMovieRatingDouble){
-		this.myMovieRating = setMovieRatingDouble;
+	public void setVideoGameRating(Double setVideoGameRatingDouble){
+		this.videoGameRating = setVideoGameRatingDouble;
 	}
 	
-	public String getMoviePlot(){
-		return this.myMoviePlot;
+	public String getVideoGameSummary(){
+		return this.videoGameSummary;
 	}
 	
-	public void setMoviePlot(String setMoviePlotString){
-		this.myMoviePlot = setMoviePlotString;
+	public void setVideoGameSummary(String setVideoGameSummaryString){
+		this.videoGameSummary = setVideoGameSummaryString;
 	}
 	
-	public String getMovieCategory(){
-		return this.myMovieCategory;
+	public String getVideoGameCategory(){
+		return this.videoGameCategory;
 	}
 	
-	public void setMovieCategory(String setMovieCategoryString){
-		this.myMovieCategory = setMovieCategoryString;
+	public void setVideoGameCategory(String setVideoGameCategoryString){
+		this.videoGameCategory = setVideoGameCategoryString;
 	}
 	
-	public String getMovieType(){
-		return this.myMovieType;
+	public String getVideoGamePlatform(){
+		return this.videoGamePlatform;
 	}
 	
-	public void setMovieType(String setMovieTypeString){
-		this.myMovieType = setMovieTypeString;
+	public void setVideoGamePlatform(String setVideoGamePlatformString){
+		this.videoGamePlatform = setVideoGamePlatformString;
 	}
 	
-	public void displayMovieInfo(){
+	public void displayVideoGameInfo(){
 		System.out.println("My ID: "+this.getID());
 		System.out.println("My Title: "+this.getTitle());
 		System.out.println("My Type: "+this.getType());
 		System.out.println("My Price: "+this.getPrice());
 		System.out.println("My Rented Status: "+this.getRentedStatus());
-		System.out.println("My Rating: "+this.getMovieRating());
-		System.out.println("My Plot: "+this.getMoviePlot());
-		System.out.println("My Category: "+this.getMovieCategory());
-		System.out.println("My Movie Type: "+this.getMovieType());
+		System.out.println("My Rating: "+this.getVideoGameRating());
+		System.out.println("My Summary: "+this.getVideoGameSummary());
+		System.out.println("My Category: "+this.getVideoGameCategory());
+		System.out.println("My Platform: "+this.getVideoGamePlatform());
 	}
 	
 	//fields for Interface
@@ -110,10 +109,9 @@ public class Movie implements RentableInterface {
 	private Double myPrice;
 	private boolean myRentedStatus;
 	
-	//fields for Movie
-	private Double myMovieRating;
-	private String myMoviePlot;
-	private String myMovieCategory;
-	private String myMovieType;
-
+	//fields for VideoGame
+	private Double videoGameRating;
+	private String videoGameSummary;
+	private String videoGameCategory;
+	private String videoGamePlatform;
 }
