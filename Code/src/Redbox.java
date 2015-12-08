@@ -238,7 +238,7 @@ public class Redbox {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Movie Rented!");
 			}
-		});
+		}); 
 		btnRentGettype.setBounds(152, 322, 149, 23);
 		ViewRentablesGUI.add(btnRentGettype);
 		
