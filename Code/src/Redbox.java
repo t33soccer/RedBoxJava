@@ -13,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -88,6 +89,9 @@ public class Redbox {
 	private User currentUser;
 
 	private static GUIMethods rbMethods = new GUIMethods();
+	private ArrayList<Movie> currentMovieList;
+	private ArrayList<VideoGame> currentVideoGameList;
+	private String currentRentable;
 	private JTextField firstNameTextField;
 	private JTextField phoneNumberTextField;
 
@@ -1309,6 +1313,7 @@ public class Redbox {
 		JButton btnNewButton_1 = new JButton("Rent Movie");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				currentRentable = "Movie";
 				btnRentGettype.setText("Rent Movie");
 				RentByGUI.setVisible(true);
 				UserHomeGUI.setVisible(false);
@@ -1349,6 +1354,7 @@ public class Redbox {
 		JButton btnRentGame = new JButton("Rent Video Game");
 		btnRentGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				currentRentable = "VideoGame";
 				btnRentGettype.setText("Rent Video Game");
 				RentByGUI.setVisible(true);
 				UserHomeGUI.setVisible(false);
@@ -1644,9 +1650,34 @@ public class Redbox {
 		button_3.setBounds(38, 116, 89, 23);
 		UserReturnGUI.add(button_3);
 		
+		JTextArea rentablesTextArea = new JTextArea();
+		rentablesTextArea.setBounds(56, 55, 245, 231);
+		rentablesTextArea.setEditable(false);
+		ViewRentablesGUI.add(rentablesTextArea);
+		
 		JButton btnCategorizeByTitle = new JButton("Categorize by Title");
 		btnCategorizeByTitle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (currentRentable == "Movie"){
+					currentMovieList = rbMethods.sortMovieByTitle(movieMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (Movie mov : currentMovieList){
+						if (mov.getRentedStatus() == false){
+							rentablesTextArea.append(mov.getID()+"-"+mov.getTitle()+"-"+mov.getMovieRating()+"-"+mov.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
+				if (currentRentable == "VideoGame"){
+					currentVideoGameList = rbMethods.sortVideoGameByTitle(videogameMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (VideoGame vg : currentVideoGameList){
+						if (vg.getRentedStatus() == false){
+						rentablesTextArea.append(vg.getID()+"-"+vg.getTitle()+"-"+vg.getVideoGameRating()+"-"+vg.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
 				lblGetcategory.setText("Sorted by Title");
 				RentByGUI.setVisible(false);
 				ViewRentablesGUI.setVisible(true);
@@ -1660,6 +1691,26 @@ public class Redbox {
 		JButton btnCategorizeByGenre = new JButton("Categorize by Genre");
 		btnCategorizeByGenre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (currentRentable == "Movie"){
+					currentMovieList = rbMethods.sortMovieByCategory(movieMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Category - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (Movie mov : currentMovieList){
+						if (mov.getRentedStatus() == false){
+						rentablesTextArea.append(mov.getID()+"-"+mov.getTitle()+"-"+mov.getMovieCategory()+"-"+mov.getMovieRating()+"-"+mov.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
+				if (currentRentable == "VideoGame"){
+					currentVideoGameList = rbMethods.sortVideoGameByCategory(videogameMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (VideoGame vg : currentVideoGameList){
+						if (vg.getRentedStatus() == false){
+						rentablesTextArea.append(vg.getID()+"-"+vg.getTitle()+"-"+vg.getVideoGameRating()+"-"+vg.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
 				lblGetcategory.setText("Sorted by Genre");
 				RentByGUI.setVisible(false);
 				ViewRentablesGUI.setVisible(true);
@@ -1671,6 +1722,26 @@ public class Redbox {
 		JButton btnCategorizeByRating = new JButton("Categorize by Rating");
 		btnCategorizeByRating.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (currentRentable == "Movie"){
+					currentMovieList = rbMethods.sortMovieByRating(movieMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (Movie mov : currentMovieList){
+						if (mov.getRentedStatus() == false){
+						rentablesTextArea.append(mov.getID()+"-"+mov.getTitle()+"-"+mov.getMovieRating()+"-"+mov.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
+				if (currentRentable == "VideoGame"){
+					currentVideoGameList = rbMethods.sortVideoGameByRating(videogameMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (VideoGame vg : currentVideoGameList){
+						if (vg.getRentedStatus() == false){
+						rentablesTextArea.append(vg.getID()+"-"+vg.getTitle()+"-"+vg.getVideoGameRating()+"-"+vg.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
 				lblGetcategory.setText("Sorted by Rating");
 				RentByGUI.setVisible(false);
 				ViewRentablesGUI.setVisible(true);
@@ -1689,10 +1760,6 @@ public class Redbox {
 		btnBack_5.setBounds(303, 179, 160, 23);
 		RentByGUI.add(btnBack_5);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(56, 55, 245, 231);
-		ViewRentablesGUI.add(textArea);
-		
 		JLabel lblId = new JLabel("I.D.");
 		lblId.setBounds(66, 326, 26, 14);
 		ViewRentablesGUI.add(lblId);
@@ -1701,13 +1768,6 @@ public class Redbox {
 		textField_20.setBounds(91, 323, 51, 20);
 		ViewRentablesGUI.add(textField_20);
 		textField_20.setColumns(10);
-		
-<<<<<<< HEAD
-		//different commment
-		
-=======
-		// Test
->>>>>>> origin/master
 		
 		JButton btnBack_6 = new JButton("Back");
 		btnBack_6.addActionListener(new ActionListener() {
