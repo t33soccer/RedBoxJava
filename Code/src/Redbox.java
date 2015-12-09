@@ -78,7 +78,7 @@ public class Redbox {
 	private JTextField editEmailTextField;
 	private JTextField editBalanceTextField;
 	private JTextField editZipCodeTextField;
-	private JTextField editPasswordTextField;
+	private JTextField editNewPasswordTextField;
 	private JTextField textField_18;
 	private JTextField textField_20;
 	
@@ -90,6 +90,9 @@ public class Redbox {
 	private static GUIMethods rbMethods = new GUIMethods();
 	private JTextField firstNameTextField;
 	private JTextField phoneNumberTextField;
+	private JTextField editConfirmNewPasswordTextField;
+	private JTextField editPhoneNumberTextField;
+	private JTextField editLastNameTextField;
 
 	/**
 	 * Launch the application.
@@ -207,20 +210,20 @@ public class Redbox {
 		final JPanel UserAccountInfoGUI = new JPanel();
 		frmWelcomeToRedbox.getContentPane().add(UserAccountInfoGUI, "name_342879160723643");
 		GridBagLayout gbl_UserAccountInfoGUI = new GridBagLayout();
-		gbl_UserAccountInfoGUI.columnWidths = new int[]{34, 52, 11, 65, 0};
-		gbl_UserAccountInfoGUI.rowHeights = new int[]{35, 14, 14, 14, 14, 14, 14, 14, 14, 14, 38, 23, 0};
-		gbl_UserAccountInfoGUI.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_UserAccountInfoGUI.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_UserAccountInfoGUI.columnWidths = new int[]{34, 52, 0, 0, 11, 0, 65, 0};
+		gbl_UserAccountInfoGUI.rowHeights = new int[]{35, 14, 14, 14, 14, 14, 14, 14, 14, 19, 19, 23, 0, 0, 0};
+		gbl_UserAccountInfoGUI.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_UserAccountInfoGUI.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		UserAccountInfoGUI.setLayout(gbl_UserAccountInfoGUI);
 		UserAccountInfoGUI.setVisible(false);
 		
 		final JPanel UserEditAccountInfoGUI = new JPanel();
 		frmWelcomeToRedbox.getContentPane().add(UserEditAccountInfoGUI, "name_341664864460551");
 		GridBagLayout gbl_UserEditAccountInfoGUI = new GridBagLayout();
-		gbl_UserEditAccountInfoGUI.columnWidths = new int[]{38, 98, 0, 11, 50, 118, 47, 88, 37, 189, 0};
-		gbl_UserEditAccountInfoGUI.rowHeights = new int[]{45, 20, 23, 20, 30, 25, 32, 20, 20, 14, 35, 0, 0};
-		gbl_UserEditAccountInfoGUI.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_UserEditAccountInfoGUI.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_UserEditAccountInfoGUI.columnWidths = new int[]{38, 98, 0, 182, 0, 11, 50, 118, 47, 88, 37, 189, 0};
+		gbl_UserEditAccountInfoGUI.rowHeights = new int[]{45, 20, 23, 20, 12, 25, 19, 20, 20, 14, 23, 18, 12, 0, 0, 0, 0};
+		gbl_UserEditAccountInfoGUI.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_UserEditAccountInfoGUI.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		UserEditAccountInfoGUI.setLayout(gbl_UserEditAccountInfoGUI);
 		UserEditAccountInfoGUI.setVisible(false);
 		
@@ -1142,34 +1145,52 @@ public class Redbox {
 		btnReturn.setBounds(270, 142, 89, 23);
 		ReturnGUI.add(btnReturn);
 		
-		JLabel label_1 = new JLabel("Name:");
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		gbc_label_1.anchor = GridBagConstraints.NORTHWEST;
-		gbc_label_1.insets = new Insets(0, 0, 5, 5);
-		gbc_label_1.gridx = 1;
-		gbc_label_1.gridy = 1;
-		UserAccountInfoGUI.add(label_1, gbc_label_1);
+		JLabel lblFirstName_1 = new JLabel("First Name:");
+		GridBagConstraints gbc_lblFirstName_1 = new GridBagConstraints();
+		gbc_lblFirstName_1.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblFirstName_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFirstName_1.gridx = 1;
+		gbc_lblFirstName_1.gridy = 1;
+		UserAccountInfoGUI.add(lblFirstName_1, gbc_lblFirstName_1);
 		
-		JLabel lblGetname = new JLabel("getName()");
+		JLabel lblGetname = new JLabel("getFirstName()");
 		GridBagConstraints gbc_lblGetname = new GridBagConstraints();
-		gbc_lblGetname.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetname.gridx = 3;
+		gbc_lblGetname.anchor = GridBagConstraints.WEST;
+		gbc_lblGetname.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetname.gridx = 4;
 		gbc_lblGetname.gridy = 1;
 		UserAccountInfoGUI.add(lblGetname, gbc_lblGetname);
+		
+		JLabel lblLastName = new JLabel("Last Name:");
+		GridBagConstraints gbc_lblLastName = new GridBagConstraints();
+		gbc_lblLastName.anchor = GridBagConstraints.WEST;
+		gbc_lblLastName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLastName.gridx = 1;
+		gbc_lblLastName.gridy = 2;
+		UserAccountInfoGUI.add(lblLastName, gbc_lblLastName);
+		
+		JLabel lblGetlastname = new JLabel("getLastName()");
+		GridBagConstraints gbc_lblGetlastname = new GridBagConstraints();
+		gbc_lblGetlastname.anchor = GridBagConstraints.WEST;
+		gbc_lblGetlastname.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetlastname.gridx = 4;
+		gbc_lblGetlastname.gridy = 2;
+		UserAccountInfoGUI.add(lblGetlastname, gbc_lblGetlastname);
 		
 		JLabel label_9 = new JLabel("Username:");
 		GridBagConstraints gbc_label_9 = new GridBagConstraints();
 		gbc_label_9.anchor = GridBagConstraints.NORTHWEST;
 		gbc_label_9.insets = new Insets(0, 0, 5, 5);
 		gbc_label_9.gridx = 1;
-		gbc_label_9.gridy = 2;
+		gbc_label_9.gridy = 3;
 		UserAccountInfoGUI.add(label_9, gbc_label_9);
 		
 		JLabel lblGetusername_1 = new JLabel("getUsername()");
 		GridBagConstraints gbc_lblGetusername_1 = new GridBagConstraints();
-		gbc_lblGetusername_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetusername_1.gridx = 3;
-		gbc_lblGetusername_1.gridy = 2;
+		gbc_lblGetusername_1.anchor = GridBagConstraints.WEST;
+		gbc_lblGetusername_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetusername_1.gridx = 4;
+		gbc_lblGetusername_1.gridy = 3;
 		UserAccountInfoGUI.add(lblGetusername_1, gbc_lblGetusername_1);
 		
 		JLabel label_10 = new JLabel("Email:");
@@ -1177,59 +1198,63 @@ public class Redbox {
 		gbc_label_10.anchor = GridBagConstraints.NORTHWEST;
 		gbc_label_10.insets = new Insets(0, 0, 5, 5);
 		gbc_label_10.gridx = 1;
-		gbc_label_10.gridy = 3;
+		gbc_label_10.gridy = 4;
 		UserAccountInfoGUI.add(label_10, gbc_label_10);
 		
 		JLabel lblGetemail = new JLabel("getEmail()");
 		GridBagConstraints gbc_lblGetemail = new GridBagConstraints();
-		gbc_lblGetemail.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetemail.gridx = 3;
-		gbc_lblGetemail.gridy = 3;
+		gbc_lblGetemail.anchor = GridBagConstraints.WEST;
+		gbc_lblGetemail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetemail.gridx = 4;
+		gbc_lblGetemail.gridy = 4;
 		UserAccountInfoGUI.add(lblGetemail, gbc_lblGetemail);
+		
+		JLabel lblPhoneNumber_1 = new JLabel("Phone Number:");
+		GridBagConstraints gbc_lblPhoneNumber_1 = new GridBagConstraints();
+		gbc_lblPhoneNumber_1.anchor = GridBagConstraints.WEST;
+		gbc_lblPhoneNumber_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPhoneNumber_1.gridx = 1;
+		gbc_lblPhoneNumber_1.gridy = 5;
+		UserAccountInfoGUI.add(lblPhoneNumber_1, gbc_lblPhoneNumber_1);
+		
+		JLabel lblGetphonenumber = new JLabel("getPhoneNumber");
+		GridBagConstraints gbc_lblGetphonenumber = new GridBagConstraints();
+		gbc_lblGetphonenumber.anchor = GridBagConstraints.WEST;
+		gbc_lblGetphonenumber.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetphonenumber.gridx = 4;
+		gbc_lblGetphonenumber.gridy = 5;
+		UserAccountInfoGUI.add(lblGetphonenumber, gbc_lblGetphonenumber);
 		
 		JLabel label_11 = new JLabel("Address:");
 		GridBagConstraints gbc_label_11 = new GridBagConstraints();
 		gbc_label_11.anchor = GridBagConstraints.NORTHWEST;
 		gbc_label_11.insets = new Insets(0, 0, 5, 5);
 		gbc_label_11.gridx = 1;
-		gbc_label_11.gridy = 4;
+		gbc_label_11.gridy = 6;
 		UserAccountInfoGUI.add(label_11, gbc_label_11);
 		
-		JLabel lblGetaddress_1 = new JLabel("getAddress()");
-		GridBagConstraints gbc_lblGetaddress_1 = new GridBagConstraints();
-		gbc_lblGetaddress_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetaddress_1.gridx = 3;
-		gbc_lblGetaddress_1.gridy = 4;
-		UserAccountInfoGUI.add(lblGetaddress_1, gbc_lblGetaddress_1);
+		JLabel lblBalance = new JLabel("Balance");
+		GridBagConstraints gbc_lblBalance = new GridBagConstraints();
+		gbc_lblBalance.anchor = GridBagConstraints.BELOW_BASELINE;
+		gbc_lblBalance.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblBalance.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBalance.gridx = 1;
+		gbc_lblBalance.gridy = 12;
+		UserEditAccountInfoGUI.add(lblBalance, gbc_lblBalance);
 		
-		JLabel label_13 = new JLabel("City:");
-		GridBagConstraints gbc_label_13 = new GridBagConstraints();
-		gbc_label_13.anchor = GridBagConstraints.NORTHWEST;
-		gbc_label_13.insets = new Insets(0, 0, 5, 5);
-		gbc_label_13.gridx = 1;
-		gbc_label_13.gridy = 5;
-		UserAccountInfoGUI.add(label_13, gbc_label_13);
-		
-		JLabel lblGetcity_1 = new JLabel("getCity()");
-		GridBagConstraints gbc_lblGetcity_1 = new GridBagConstraints();
-		gbc_lblGetcity_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetcity_1.gridx = 3;
-		gbc_lblGetcity_1.gridy = 5;
-		UserAccountInfoGUI.add(lblGetcity_1, gbc_lblGetcity_1);
-		
-		JLabel label_14 = new JLabel("State:");
-		GridBagConstraints gbc_label_14 = new GridBagConstraints();
-		gbc_label_14.anchor = GridBagConstraints.NORTHWEST;
-		gbc_label_14.insets = new Insets(0, 0, 5, 5);
-		gbc_label_14.gridx = 1;
-		gbc_label_14.gridy = 6;
-		UserAccountInfoGUI.add(label_14, gbc_label_14);
+		JLabel label_12 = new JLabel("$");
+		GridBagConstraints gbc_label_12 = new GridBagConstraints();
+		gbc_label_12.insets = new Insets(0, 0, 5, 5);
+		gbc_label_12.gridx = 2;
+		gbc_label_12.gridy = 12;
+		UserEditAccountInfoGUI.add(label_12, gbc_label_12);
 		
 		JLabel lblGetstate_1 = new JLabel("getState()");
 		GridBagConstraints gbc_lblGetstate_1 = new GridBagConstraints();
-		gbc_lblGetstate_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetstate_1.gridx = 3;
-		gbc_lblGetstate_1.gridy = 6;
+		gbc_lblGetstate_1.anchor = GridBagConstraints.WEST;
+		gbc_lblGetstate_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetstate_1.gridx = 4;
+		gbc_lblGetstate_1.gridy = 8;
 		UserAccountInfoGUI.add(lblGetstate_1, gbc_lblGetstate_1);
 		
 		JLabel label_15 = new JLabel("Zipcode:");
@@ -1237,30 +1262,32 @@ public class Redbox {
 		gbc_label_15.anchor = GridBagConstraints.NORTHWEST;
 		gbc_label_15.insets = new Insets(0, 0, 5, 5);
 		gbc_label_15.gridx = 1;
-		gbc_label_15.gridy = 7;
+		gbc_label_15.gridy = 9;
 		UserAccountInfoGUI.add(label_15, gbc_label_15);
 		
 		JLabel lblGetzipcode = new JLabel("getZipcode()");
 		GridBagConstraints gbc_lblGetzipcode = new GridBagConstraints();
-		gbc_lblGetzipcode.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetzipcode.gridx = 3;
-		gbc_lblGetzipcode.gridy = 7;
+		gbc_lblGetzipcode.anchor = GridBagConstraints.WEST;
+		gbc_lblGetzipcode.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetzipcode.gridx = 4;
+		gbc_lblGetzipcode.gridy = 9;
 		UserAccountInfoGUI.add(lblGetzipcode, gbc_lblGetzipcode);
 		
 		JLabel lblPassword_2 = new JLabel("Password:");
 		GridBagConstraints gbc_lblPassword_2 = new GridBagConstraints();
 		gbc_lblPassword_2.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblPassword_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassword_2.gridwidth = 2;
+		gbc_lblPassword_2.gridwidth = 4;
 		gbc_lblPassword_2.gridx = 1;
-		gbc_lblPassword_2.gridy = 8;
+		gbc_lblPassword_2.gridy = 10;
 		UserAccountInfoGUI.add(lblPassword_2, gbc_lblPassword_2);
 		
 		JLabel lblGetpassword = new JLabel("getPassword()");
 		GridBagConstraints gbc_lblGetpassword = new GridBagConstraints();
-		gbc_lblGetpassword.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetpassword.gridx = 3;
-		gbc_lblGetpassword.gridy = 8;
+		gbc_lblGetpassword.anchor = GridBagConstraints.WEST;
+		gbc_lblGetpassword.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetpassword.gridx = 4;
+		gbc_lblGetpassword.gridy = 10;
 		UserAccountInfoGUI.add(lblGetpassword, gbc_lblGetpassword);
 		
 		JLabel label_17 = new JLabel("Balance");
@@ -1268,28 +1295,62 @@ public class Redbox {
 		gbc_label_17.anchor = GridBagConstraints.NORTHWEST;
 		gbc_label_17.insets = new Insets(0, 0, 5, 5);
 		gbc_label_17.gridx = 1;
-		gbc_label_17.gridy = 9;
+		gbc_label_17.gridy = 11;
 		UserAccountInfoGUI.add(label_17, gbc_label_17);
 		
 		JLabel label_18 = new JLabel("$");
 		GridBagConstraints gbc_label_18 = new GridBagConstraints();
 		gbc_label_18.anchor = GridBagConstraints.NORTHWEST;
 		gbc_label_18.insets = new Insets(0, 0, 5, 5);
-		gbc_label_18.gridx = 2;
-		gbc_label_18.gridy = 9;
+		gbc_label_18.gridx = 3;
+		gbc_label_18.gridy = 11;
 		UserAccountInfoGUI.add(label_18, gbc_label_18);
 		
 		JLabel lblGetbalance = new JLabel("getBalance()");
 		GridBagConstraints gbc_lblGetbalance = new GridBagConstraints();
-		gbc_lblGetbalance.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetbalance.gridx = 3;
-		gbc_lblGetbalance.gridy = 9;
+		gbc_lblGetbalance.anchor = GridBagConstraints.WEST;
+		gbc_lblGetbalance.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetbalance.gridx = 4;
+		gbc_lblGetbalance.gridy = 11;
 		UserAccountInfoGUI.add(lblGetbalance, gbc_lblGetbalance);
+		
+		JLabel lblGetaddress_1 = new JLabel("getAddress()");
+		GridBagConstraints gbc_lblGetaddress_1 = new GridBagConstraints();
+		gbc_lblGetaddress_1.anchor = GridBagConstraints.WEST;
+		gbc_lblGetaddress_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetaddress_1.gridx = 4;
+		gbc_lblGetaddress_1.gridy = 6;
+		UserAccountInfoGUI.add(lblGetaddress_1, gbc_lblGetaddress_1);
+		
+		JLabel label_13 = new JLabel("City:");
+		GridBagConstraints gbc_label_13 = new GridBagConstraints();
+		gbc_label_13.anchor = GridBagConstraints.NORTHWEST;
+		gbc_label_13.insets = new Insets(0, 0, 5, 5);
+		gbc_label_13.gridx = 1;
+		gbc_label_13.gridy = 7;
+		UserAccountInfoGUI.add(label_13, gbc_label_13);
+		
+		JLabel lblGetcity_1 = new JLabel("getCity()");
+		GridBagConstraints gbc_lblGetcity_1 = new GridBagConstraints();
+		gbc_lblGetcity_1.anchor = GridBagConstraints.WEST;
+		gbc_lblGetcity_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGetcity_1.gridx = 4;
+		gbc_lblGetcity_1.gridy = 7;
+		UserAccountInfoGUI.add(lblGetcity_1, gbc_lblGetcity_1);
+		
+		JLabel label_14 = new JLabel("State:");
+		GridBagConstraints gbc_label_14 = new GridBagConstraints();
+		gbc_label_14.anchor = GridBagConstraints.NORTHWEST;
+		gbc_label_14.insets = new Insets(0, 0, 5, 5);
+		gbc_label_14.gridx = 1;
+		gbc_label_14.gridy = 8;
+		UserAccountInfoGUI.add(label_14, gbc_label_14);
 				
 		JButton btnNewButton = new JButton("Account Info");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lblGetname.setText(currentUser.getFirstName());
+				lblGetlastname.setText(currentUser.getLastName());
 				lblGetusername_1.setText(currentUser.getID());
 				lblGetemail.setText(currentUser.getEmail());
 				lblGetaddress_1.setText(currentUser.getAddress());
@@ -1298,6 +1359,7 @@ public class Redbox {
 				lblGetzipcode.setText(currentUser.getZip());
 				lblGetpassword.setText(currentUser.getPassword());
 				lblGetbalance.setText(String.valueOf(currentUser.getBalance()));
+				lblGetphonenumber.setText(currentUser.getPhoneNumber());
 				UserAccountInfoGUI.setVisible(true);
 				UserHomeGUI.setVisible(false);
 			}
@@ -1359,13 +1421,13 @@ public class Redbox {
 		
 		
 		
-		JLabel label_2 = new JLabel("Name:");
-		GridBagConstraints gbc_label_2 = new GridBagConstraints();
-		gbc_label_2.anchor = GridBagConstraints.WEST;
-		gbc_label_2.insets = new Insets(0, 0, 5, 5);
-		gbc_label_2.gridx = 1;
-		gbc_label_2.gridy = 1;
-		UserEditAccountInfoGUI.add(label_2, gbc_label_2);
+		JLabel lblFirstName_2 = new JLabel("First Name:");
+		GridBagConstraints gbc_lblFirstName_2 = new GridBagConstraints();
+		gbc_lblFirstName_2.anchor = GridBagConstraints.WEST;
+		gbc_lblFirstName_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFirstName_2.gridx = 1;
+		gbc_lblFirstName_2.gridy = 1;
+		UserEditAccountInfoGUI.add(lblFirstName_2, gbc_lblFirstName_2);
 		
 		editFirstNameTextField = new JTextField();
 		editFirstNameTextField.setColumns(10);
@@ -1373,17 +1435,33 @@ public class Redbox {
 		gbc_editFirstNameTextField.anchor = GridBagConstraints.NORTH;
 		gbc_editFirstNameTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_editFirstNameTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editFirstNameTextField.gridwidth = 3;
 		gbc_editFirstNameTextField.gridx = 3;
 		gbc_editFirstNameTextField.gridy = 1;
 		UserEditAccountInfoGUI.add(editFirstNameTextField, gbc_editFirstNameTextField);
+		
+		JLabel lblLastName_1 = new JLabel("Last Name:");
+		GridBagConstraints gbc_lblLastName_1 = new GridBagConstraints();
+		gbc_lblLastName_1.anchor = GridBagConstraints.WEST;
+		gbc_lblLastName_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLastName_1.gridx = 1;
+		gbc_lblLastName_1.gridy = 2;
+		UserEditAccountInfoGUI.add(lblLastName_1, gbc_lblLastName_1);
+		
+		editLastNameTextField = new JTextField();
+		GridBagConstraints gbc_editLastNameTextField = new GridBagConstraints();
+		gbc_editLastNameTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_editLastNameTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_editLastNameTextField.gridx = 3;
+		gbc_editLastNameTextField.gridy = 2;
+		UserEditAccountInfoGUI.add(editLastNameTextField, gbc_editLastNameTextField);
+		editLastNameTextField.setColumns(10);
 		
 		JLabel label_3 = new JLabel("Username:");
 		GridBagConstraints gbc_label_3 = new GridBagConstraints();
 		gbc_label_3.anchor = GridBagConstraints.WEST;
 		gbc_label_3.insets = new Insets(0, 0, 5, 5);
 		gbc_label_3.gridx = 1;
-		gbc_label_3.gridy = 2;
+		gbc_label_3.gridy = 3;
 		UserEditAccountInfoGUI.add(label_3, gbc_label_3);
 		
 		editIDTextField = new JTextField();
@@ -1392,9 +1470,8 @@ public class Redbox {
 		gbc_editIDTextField.anchor = GridBagConstraints.NORTH;
 		gbc_editIDTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_editIDTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editIDTextField.gridwidth = 3;
 		gbc_editIDTextField.gridx = 3;
-		gbc_editIDTextField.gridy = 2;
+		gbc_editIDTextField.gridy = 3;
 		UserEditAccountInfoGUI.add(editIDTextField, gbc_editIDTextField);
 		
 		JLabel label_4 = new JLabel("Email:");
@@ -1402,7 +1479,7 @@ public class Redbox {
 		gbc_label_4.anchor = GridBagConstraints.WEST;
 		gbc_label_4.insets = new Insets(0, 0, 5, 5);
 		gbc_label_4.gridx = 1;
-		gbc_label_4.gridy = 3;
+		gbc_label_4.gridy = 4;
 		UserEditAccountInfoGUI.add(label_4, gbc_label_4);
 		
 		editEmailTextField = new JTextField();
@@ -1411,17 +1488,33 @@ public class Redbox {
 		gbc_editEmailTextField.anchor = GridBagConstraints.NORTH;
 		gbc_editEmailTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_editEmailTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editEmailTextField.gridwidth = 3;
 		gbc_editEmailTextField.gridx = 3;
-		gbc_editEmailTextField.gridy = 3;
+		gbc_editEmailTextField.gridy = 4;
 		UserEditAccountInfoGUI.add(editEmailTextField, gbc_editEmailTextField);
+		
+		JLabel lblPhoneNumber_2 = new JLabel("Phone Number:");
+		GridBagConstraints gbc_lblPhoneNumber_2 = new GridBagConstraints();
+		gbc_lblPhoneNumber_2.anchor = GridBagConstraints.WEST;
+		gbc_lblPhoneNumber_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPhoneNumber_2.gridx = 1;
+		gbc_lblPhoneNumber_2.gridy = 5;
+		UserEditAccountInfoGUI.add(lblPhoneNumber_2, gbc_lblPhoneNumber_2);
+		
+		editPhoneNumberTextField = new JTextField();
+		GridBagConstraints gbc_editPhoneNumberTextField = new GridBagConstraints();
+		gbc_editPhoneNumberTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_editPhoneNumberTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_editPhoneNumberTextField.gridx = 3;
+		gbc_editPhoneNumberTextField.gridy = 5;
+		UserEditAccountInfoGUI.add(editPhoneNumberTextField, gbc_editPhoneNumberTextField);
+		editPhoneNumberTextField.setColumns(10);
 		
 		JLabel label_5 = new JLabel("Address:");
 		GridBagConstraints gbc_label_5 = new GridBagConstraints();
 		gbc_label_5.anchor = GridBagConstraints.WEST;
 		gbc_label_5.insets = new Insets(0, 0, 5, 5);
 		gbc_label_5.gridx = 1;
-		gbc_label_5.gridy = 4;
+		gbc_label_5.gridy = 6;
 		UserEditAccountInfoGUI.add(label_5, gbc_label_5);
 		
 		editAddressTextField = new JTextField();
@@ -1430,9 +1523,8 @@ public class Redbox {
 		gbc_editAddressTextField.anchor = GridBagConstraints.SOUTH;
 		gbc_editAddressTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_editAddressTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editAddressTextField.gridwidth = 3;
 		gbc_editAddressTextField.gridx = 3;
-		gbc_editAddressTextField.gridy = 4;
+		gbc_editAddressTextField.gridy = 6;
 		UserEditAccountInfoGUI.add(editAddressTextField, gbc_editAddressTextField);
 		
 		JLabel label_6 = new JLabel("City:");
@@ -1440,7 +1532,7 @@ public class Redbox {
 		gbc_label_6.anchor = GridBagConstraints.WEST;
 		gbc_label_6.insets = new Insets(0, 0, 5, 5);
 		gbc_label_6.gridx = 1;
-		gbc_label_6.gridy = 5;
+		gbc_label_6.gridy = 7;
 		UserEditAccountInfoGUI.add(label_6, gbc_label_6);
 		
 		editCityTextField = new JTextField();
@@ -1449,9 +1541,8 @@ public class Redbox {
 		gbc_editCityTextField.anchor = GridBagConstraints.SOUTH;
 		gbc_editCityTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_editCityTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editCityTextField.gridwidth = 3;
 		gbc_editCityTextField.gridx = 3;
-		gbc_editCityTextField.gridy = 5;
+		gbc_editCityTextField.gridy = 7;
 		UserEditAccountInfoGUI.add(editCityTextField, gbc_editCityTextField);
 		
 		JLabel label_7 = new JLabel("State:");
@@ -1459,7 +1550,7 @@ public class Redbox {
 		gbc_label_7.anchor = GridBagConstraints.WEST;
 		gbc_label_7.insets = new Insets(0, 0, 5, 5);
 		gbc_label_7.gridx = 1;
-		gbc_label_7.gridy = 6;
+		gbc_label_7.gridy = 8;
 		UserEditAccountInfoGUI.add(label_7, gbc_label_7);
 		
 		editStateTextField = new JTextField();
@@ -1467,9 +1558,8 @@ public class Redbox {
 		GridBagConstraints gbc_editStateTextField = new GridBagConstraints();
 		gbc_editStateTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_editStateTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editStateTextField.gridwidth = 3;
 		gbc_editStateTextField.gridx = 3;
-		gbc_editStateTextField.gridy = 6;
+		gbc_editStateTextField.gridy = 8;
 		UserEditAccountInfoGUI.add(editStateTextField, gbc_editStateTextField);
 		
 		JLabel label_8 = new JLabel("Zipcode:");
@@ -1477,7 +1567,7 @@ public class Redbox {
 		gbc_label_8.anchor = GridBagConstraints.WEST;
 		gbc_label_8.insets = new Insets(0, 0, 5, 5);
 		gbc_label_8.gridx = 1;
-		gbc_label_8.gridy = 7;
+		gbc_label_8.gridy = 9;
 		UserEditAccountInfoGUI.add(label_8, gbc_label_8);
 		
 		editZipCodeTextField = new JTextField();
@@ -1485,9 +1575,8 @@ public class Redbox {
 		GridBagConstraints gbc_editZipCodeTextField = new GridBagConstraints();
 		gbc_editZipCodeTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_editZipCodeTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editZipCodeTextField.gridwidth = 3;
 		gbc_editZipCodeTextField.gridx = 3;
-		gbc_editZipCodeTextField.gridy = 7;
+		gbc_editZipCodeTextField.gridy = 9;
 		UserEditAccountInfoGUI.add(editZipCodeTextField, gbc_editZipCodeTextField);
 		
 		JLabel lblNewPassword = new JLabel("New Password:");
@@ -1495,64 +1584,57 @@ public class Redbox {
 		gbc_lblNewPassword.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewPassword.gridx = 1;
-		gbc_lblNewPassword.gridy = 8;
+		gbc_lblNewPassword.gridy = 10;
 		UserEditAccountInfoGUI.add(lblNewPassword, gbc_lblNewPassword);
 		
-		editPasswordTextField = new JTextField();
-		editPasswordTextField.setColumns(10);
-		GridBagConstraints gbc_editPasswordTextField = new GridBagConstraints();
-		gbc_editPasswordTextField.anchor = GridBagConstraints.NORTH;
-		gbc_editPasswordTextField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_editPasswordTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editPasswordTextField.gridwidth = 3;
-		gbc_editPasswordTextField.gridx = 3;
-		gbc_editPasswordTextField.gridy = 8;
-		UserEditAccountInfoGUI.add(editPasswordTextField, gbc_editPasswordTextField);
+		editNewPasswordTextField = new JTextField();
+		editNewPasswordTextField.setColumns(10);
+		GridBagConstraints gbc_editNewPasswordTextField = new GridBagConstraints();
+		gbc_editNewPasswordTextField.anchor = GridBagConstraints.NORTH;
+		gbc_editNewPasswordTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_editNewPasswordTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_editNewPasswordTextField.gridx = 3;
+		gbc_editNewPasswordTextField.gridy = 10;
+		UserEditAccountInfoGUI.add(editNewPasswordTextField, gbc_editNewPasswordTextField);
 		
-		JLabel lblBalance = new JLabel("Balance");
-		GridBagConstraints gbc_lblBalance = new GridBagConstraints();
-		gbc_lblBalance.anchor = GridBagConstraints.BELOW_BASELINE;
-		gbc_lblBalance.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblBalance.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBalance.gridx = 1;
-		gbc_lblBalance.gridy = 9;
-		UserEditAccountInfoGUI.add(lblBalance, gbc_lblBalance);
+		JLabel lblConfirmNewPassword = new JLabel("Confirm New Password:");
+		GridBagConstraints gbc_lblConfirmNewPassword = new GridBagConstraints();
+		gbc_lblConfirmNewPassword.anchor = GridBagConstraints.WEST;
+		gbc_lblConfirmNewPassword.insets = new Insets(0, 0, 5, 5);
+		gbc_lblConfirmNewPassword.gridx = 1;
+		gbc_lblConfirmNewPassword.gridy = 11;
+		UserEditAccountInfoGUI.add(lblConfirmNewPassword, gbc_lblConfirmNewPassword);
 		
-		JLabel label_12 = new JLabel("$");
-		GridBagConstraints gbc_label_12 = new GridBagConstraints();
-		gbc_label_12.insets = new Insets(0, 0, 5, 5);
-		gbc_label_12.gridx = 2;
-		gbc_label_12.gridy = 9;
-		UserEditAccountInfoGUI.add(label_12, gbc_label_12);
-		
-		editBalanceTextField = new JTextField();
-		editBalanceTextField.setColumns(10);
-		GridBagConstraints gbc_editBalanceTextField = new GridBagConstraints();
-		gbc_editBalanceTextField.gridwidth = 3;
-		gbc_editBalanceTextField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_editBalanceTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_editBalanceTextField.gridx = 3;
-		gbc_editBalanceTextField.gridy = 9;
-		UserEditAccountInfoGUI.add(editBalanceTextField, gbc_editBalanceTextField);
+		editConfirmNewPasswordTextField = new JTextField();
+		GridBagConstraints gbc_editConfirmNewPasswordTextField = new GridBagConstraints();
+		gbc_editConfirmNewPasswordTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_editConfirmNewPasswordTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_editConfirmNewPasswordTextField.gridx = 3;
+		gbc_editConfirmNewPasswordTextField.gridy = 11;
+		UserEditAccountInfoGUI.add(editConfirmNewPasswordTextField, gbc_editConfirmNewPasswordTextField);
+		editConfirmNewPasswordTextField.setColumns(10);
 		
 		JButton editInfoSumbitButton = new JButton("Submit");
 		editInfoSumbitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//check password
 				currentUser.setFirstName(editFirstNameTextField.getText());
+				currentUser.setLastName(editLastNameTextField.getText());
 				currentUser.setID(editIDTextField.getText());
 				currentUser.setEmail(editEmailTextField.getText());
 				currentUser.setAddress(editAddressTextField.getText());
 				currentUser.setCity(editCityTextField.getText());
 				currentUser.setState(editStateTextField.getText());
 				currentUser.setZip(editZipCodeTextField.getText());
-				currentUser.setPassword(editPasswordTextField.getText());
+				currentUser.setPassword(editNewPasswordTextField.getText());
 				currentUser.setBalance(Double.valueOf(editBalanceTextField.getText()));
-				//add phone number
+				currentUser.setPhoneNumber(editPhoneNumberTextField.getText());
 				
 				lblGetname.setText(currentUser.getFirstName());
+				lblGetlastname.setText(currentUser.getLastName());
 				lblGetusername_1.setText(currentUser.getID());
 				lblGetemail.setText(currentUser.getEmail());
+				lblGetphonenumber.setText(currentUser.getPhoneNumber());
 				lblGetaddress_1.setText(currentUser.getAddress());
 				lblGetcity_1.setText(currentUser.getCity());
 				lblGetstate_1.setText(currentUser.getState());
@@ -1563,11 +1645,20 @@ public class Redbox {
 				UserEditAccountInfoGUI.setVisible(false);
 			}
 		});
+		
+		editBalanceTextField = new JTextField();
+		editBalanceTextField.setColumns(10);
+		GridBagConstraints gbc_editBalanceTextField = new GridBagConstraints();
+		gbc_editBalanceTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_editBalanceTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_editBalanceTextField.gridx = 3;
+		gbc_editBalanceTextField.gridy = 12;
+		UserEditAccountInfoGUI.add(editBalanceTextField, gbc_editBalanceTextField);
 		GridBagConstraints gbc_editInfoSumbitButton = new GridBagConstraints();
-		gbc_editInfoSumbitButton.insets = new Insets(0, 0, 0, 5);
-		gbc_editInfoSumbitButton.gridwidth = 3;
+		gbc_editInfoSumbitButton.insets = new Insets(0, 0, 5, 5);
+		gbc_editInfoSumbitButton.gridwidth = 2;
 		gbc_editInfoSumbitButton.gridx = 1;
-		gbc_editInfoSumbitButton.gridy = 11;
+		gbc_editInfoSumbitButton.gridy = 14;
 		UserEditAccountInfoGUI.add(editInfoSumbitButton, gbc_editInfoSumbitButton);
 		
 		JButton button = new JButton("Cancel");
@@ -1578,25 +1669,37 @@ public class Redbox {
 			}
 		});
 		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.insets = new Insets(0, 0, 0, 5);
-		gbc_button.gridx = 4;
-		gbc_button.gridy = 11;
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 3;
+		gbc_button.gridy = 14;
 		UserEditAccountInfoGUI.add(button, gbc_button);
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserAccountInfoGUI.setVisible(false);	
-				UserEditAccountInfoGUI.setVisible(true);			
+				UserEditAccountInfoGUI.setVisible(true);
+				editFirstNameTextField.setText(currentUser.getFirstName());
+				editLastNameTextField.setText(currentUser.getLastName());
+				editIDTextField.setText(currentUser.getID());
+				editEmailTextField.setText(currentUser.getEmail());
+				editPhoneNumberTextField.setText(currentUser.getPhoneNumber());
+				editAddressTextField.setText(currentUser.getAddress());
+				editCityTextField.setText(currentUser.getCity());
+				editStateTextField.setText(currentUser.getState());
+				editZipCodeTextField.setText(currentUser.getZip());
+				editNewPasswordTextField.setText(currentUser.getPassword());
+				editConfirmNewPasswordTextField.setText(currentUser.getPassword());
+				editBalanceTextField.setText(String.valueOf(currentUser.getBalance()));
 			}
 		});
+		
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
 		gbc_btnEdit.anchor = GridBagConstraints.NORTH;
 		gbc_btnEdit.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnEdit.insets = new Insets(0, 0, 0, 5);
-		gbc_btnEdit.gridwidth = 2;
 		gbc_btnEdit.gridx = 1;
-		gbc_btnEdit.gridy = 11;
+		gbc_btnEdit.gridy = 13;
 		UserAccountInfoGUI.add(btnEdit, gbc_btnEdit);
 		
 		JButton btnBack_4 = new JButton("Back");
@@ -1608,10 +1711,11 @@ public class Redbox {
 		});
 		
 		GridBagConstraints gbc_btnBack_4 = new GridBagConstraints();
+		gbc_btnBack_4.insets = new Insets(0, 0, 0, 5);
 		gbc_btnBack_4.anchor = GridBagConstraints.NORTH;
 		gbc_btnBack_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnBack_4.gridx = 3;
-		gbc_btnBack_4.gridy = 11;
+		gbc_btnBack_4.gridx = 4;
+		gbc_btnBack_4.gridy = 13;
 		UserAccountInfoGUI.add(btnBack_4, gbc_btnBack_4);
 				
 		JLabel label_16 = new JLabel("Rent Item I.D. ");
