@@ -1702,6 +1702,9 @@ public class Redbox {
 		ViewRentablesGUI.add(textField_20);
 		textField_20.setColumns(10);
 		
+		//different commment
+		
+		
 		JButton btnBack_6 = new JButton("Back");
 		btnBack_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
