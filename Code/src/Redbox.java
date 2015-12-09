@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Font;
@@ -40,16 +42,16 @@ public class Redbox {
 	private JTextField changeGenCatTextField;
 	private JTextField changeRatingTextField;
 	private JTextField changeTypPlatTextField;
-	private JTextField nameTextField;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField zipcodeTextField_5;
-	private JTextField startBalTextField_6;
-	private JTextField pwordTextField_7;
-	private JTextField confirmpwordTextField_8;
+	private JTextField lastNameTextField;
+	private JTextField IDTextField;
+	private JTextField emailTextField;
+	private JTextField addressTextField;
+	private JTextField cityTextField;
+	private JTextField stateTextField;
+	private JTextField zipTextField;
+	private JTextField balanceTextField;
+	private JTextField passwordTextField;
+	private JTextField checkPasswordTextField;
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JPanel RedBox;
@@ -79,6 +81,15 @@ public class Redbox {
 	private JTextField textField_19;
 	private JTextField textField_18;
 	private JTextField textField_20;
+	
+	private static Map<String,User> userMap;
+	private static Map<String,Movie> movieMap;
+	private static Map<String,VideoGame> videogameMap;
+	private User currentUser;
+
+	private static GUIMethods rbMethods = new GUIMethods();
+	private JTextField firstNameTextField;
+	private JTextField phoneNumberTextField;
 
 	/**
 	 * Launch the application.
@@ -87,6 +98,9 @@ public class Redbox {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					userMap = rbMethods.loadUserAccountsMap();
+					movieMap = rbMethods.loadMovieMap();
+					videogameMap = rbMethods.loadVideoGameMap();
 					Redbox window = new Redbox();
 					window.frmWelcomeToRedbox.setVisible(true);
 				} catch (Exception e) {
@@ -226,8 +240,19 @@ public class Redbox {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RedBox.setVisible(false);
-				UserHomeGUI.setVisible(true);
+				if (userMap.get(usernameTextField.getText()) == null){
+					JOptionPane.showMessageDialog(null, "Invalid User");
+				}
+				else if (userMap.get(usernameTextField.getText()) != null){
+					if (String.valueOf(passwordField.getPassword()).equals(userMap.get(usernameTextField.getText()).getPassword())){
+						currentUser = userMap.get(usernameTextField.getText());
+						RedBox.setVisible(false);
+						UserHomeGUI.setVisible(true);
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Incorrect Password");
+					}
+				}
 			}
 		});
 		btnLogin.setBounds(275, 49, 89, 23);
@@ -903,11 +928,11 @@ public class Redbox {
 		textField_9.setColumns(10);
 		
 		JLabel lblCreateProfile = new JLabel("Create Profile");
-		lblCreateProfile.setBounds(124, 28, 88, 14);
+		lblCreateProfile.setBounds(124, 11, 88, 14);
 		NewUserGUI.add(lblCreateProfile);
 		
-		JLabel lblName_1 = new JLabel("Name:");
-		lblName_1.setBounds(34, 63, 46, 14);
+		JLabel lblName_1 = new JLabel("Last Name:");
+		lblName_1.setBounds(34, 63, 75, 14);
 		NewUserGUI.add(lblName_1);
 		
 		JLabel lblUsername_2 = new JLabel("Username:");
@@ -959,76 +984,113 @@ public class Redbox {
 				
 			}
 		});
-		btnCancel.setBounds(34, 339, 89, 23);
+		btnCancel.setBounds(34, 353, 89, 23);
 		NewUserGUI.add(btnCancel);
 		
-		nameTextField = new JTextField();
-		nameTextField.setBounds(153, 60, 179, 20);
-		NewUserGUI.add(nameTextField);
-		nameTextField.setColumns(10);
+		firstNameTextField = new JTextField();
+		firstNameTextField.setColumns(10);
+		firstNameTextField.setBounds(153, 36, 179, 20);
+		NewUserGUI.add(firstNameTextField);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(153, 85, 179, 20);
-		NewUserGUI.add(textField);
+		lastNameTextField = new JTextField();
+		lastNameTextField.setBounds(153, 60, 179, 20);
+		NewUserGUI.add(lastNameTextField);
+		lastNameTextField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(153, 110, 179, 20);
-		NewUserGUI.add(textField_1);
+		IDTextField = new JTextField();
+		IDTextField.setColumns(10);
+		IDTextField.setBounds(153, 85, 179, 20);
+		NewUserGUI.add(IDTextField);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(153, 135, 179, 20);
-		NewUserGUI.add(textField_2);
+		emailTextField = new JTextField();
+		emailTextField.setColumns(10);
+		emailTextField.setBounds(153, 110, 179, 20);
+		NewUserGUI.add(emailTextField);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(153, 160, 179, 20);
-		NewUserGUI.add(textField_3);
+		addressTextField = new JTextField();
+		addressTextField.setColumns(10);
+		addressTextField.setBounds(153, 135, 179, 20);
+		NewUserGUI.add(addressTextField);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(153, 185, 179, 20);
-		NewUserGUI.add(textField_4);
+		cityTextField = new JTextField();
+		cityTextField.setColumns(10);
+		cityTextField.setBounds(153, 160, 179, 20);
+		NewUserGUI.add(cityTextField);
 		
-		zipcodeTextField_5 = new JTextField();
-		zipcodeTextField_5.setColumns(10);
-		zipcodeTextField_5.setBounds(153, 210, 179, 20);
-		NewUserGUI.add(zipcodeTextField_5);
+		stateTextField = new JTextField();
+		stateTextField.setColumns(10);
+		stateTextField.setBounds(153, 185, 179, 20);
+		NewUserGUI.add(stateTextField);
 		
-		startBalTextField_6 = new JTextField();
-		startBalTextField_6.setColumns(10);
-		startBalTextField_6.setBounds(153, 235, 179, 20);
-		NewUserGUI.add(startBalTextField_6);
+		zipTextField = new JTextField();
+		zipTextField.setColumns(10);
+		zipTextField.setBounds(153, 210, 179, 20);
+		NewUserGUI.add(zipTextField);
 		
-		pwordTextField_7 = new JTextField();
-		pwordTextField_7.setColumns(10);
-		pwordTextField_7.setBounds(153, 260, 179, 20);
-		NewUserGUI.add(pwordTextField_7);
+		balanceTextField = new JTextField();
+		balanceTextField.setColumns(10);
+		balanceTextField.setBounds(153, 235, 179, 20);
+		NewUserGUI.add(balanceTextField);
 		
-		confirmpwordTextField_8 = new JTextField();
-		confirmpwordTextField_8.setColumns(10);
-		confirmpwordTextField_8.setBounds(153, 285, 179, 20);
-		NewUserGUI.add(confirmpwordTextField_8);
+		passwordTextField = new JTextField();
+		passwordTextField.setColumns(10);
+		passwordTextField.setBounds(153, 260, 179, 20);
+		NewUserGUI.add(passwordTextField);
+		
+		checkPasswordTextField = new JTextField();
+		checkPasswordTextField.setColumns(10);
+		checkPasswordTextField.setBounds(153, 285, 179, 20);
+		NewUserGUI.add(checkPasswordTextField);
+		
+		phoneNumberTextField = new JTextField();
+		phoneNumberTextField.setColumns(10);
+		phoneNumberTextField.setBounds(153, 310, 179, 20);
+		NewUserGUI.add(phoneNumberTextField);
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "UserGUI not made!!!");
-				
-				
-				
-				
-				
+				if (passwordTextField.getText().equals(checkPasswordTextField.getText())){
+					User temp = new User(IDTextField.getText(), passwordTextField.getText());
+					temp.setFirstName(firstNameTextField.getText());
+					temp.setLastName(lastNameTextField.getText());
+					temp.setEmail(emailTextField.getText());
+					temp.setAddress(addressTextField.getText());
+					temp.setCity(cityTextField.getText());
+					temp.setState(stateTextField.getText());
+					temp.setZip(zipTextField.getText());
+					temp.setBalance(Double.valueOf(balanceTextField.getText()));
+					temp.setAdminRights(false);
+					temp.setPhoneNumber(phoneNumberTextField.getText());
+					userMap.put(temp.getID(), temp);
+					RedBox.setVisible(true);
+					NewUserGUI.setVisible(false);
+					try {
+						rbMethods.returnUserMap(userMap);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Passwords do not match");
+				}
 			}
 		});
-		btnSubmit.setBounds(201, 339, 89, 23);
+		btnSubmit.setBounds(203, 353, 89, 23);
 		NewUserGUI.add(btnSubmit);
 		
 		JLabel label = new JLabel("$");
 		label.setBounds(142, 238, 21, 14);
 		NewUserGUI.add(label);		
+		
+		JLabel lblFirstName = new JLabel("First Name:");
+		lblFirstName.setBounds(34, 39, 75, 14);
+		NewUserGUI.add(lblFirstName);
+		
+		JLabel lblPhoneNumber = new JLabel("Phone Number:");
+		lblPhoneNumber.setBounds(34, 313, 118, 14);
+		NewUserGUI.add(lblPhoneNumber);
 		
 		JLabel lblRentedItemId = new JLabel("Rent Item I.D. ");
 		lblRentedItemId.setBounds(52, 37, 203, 14);
@@ -1083,6 +1145,8 @@ public class Redbox {
 		JButton btnNewButton = new JButton("Account Info");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
 				UserAccountInfoGUI.setVisible(true);
 				UserHomeGUI.setVisible(false);
 			}
@@ -1115,6 +1179,15 @@ public class Redbox {
 		JButton btnNewButton_3 = new JButton("Log Off");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					rbMethods.returnMovieMap(movieMap);
+					rbMethods.returnUserMap(userMap);
+					rbMethods.returnVideoGameMap(videogameMap);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				currentUser = null;
 				RedBox.setVisible(true);
 				UserHomeGUI.setVisible(false);
 			}
