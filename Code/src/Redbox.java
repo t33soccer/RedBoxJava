@@ -13,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -88,11 +89,19 @@ public class Redbox {
 	private User currentUser;
 
 	private static GUIMethods rbMethods = new GUIMethods();
+	private ArrayList<Movie> currentMovieList;
+	private ArrayList<VideoGame> currentVideoGameList;
+	private String currentRentable;
 	private JTextField firstNameTextField;
 	private JTextField phoneNumberTextField;
+<<<<<<< HEAD
 	private JTextField editConfirmNewPasswordTextField;
 	private JTextField editPhoneNumberTextField;
 	private JTextField editLastNameTextField;
+=======
+	private JTextField textField;
+	private JTextField textField_1;
+>>>>>>> 076ff7faafabc71790d029e243241021f49cbb88
 
 	/**
 	 * Launch the application.
@@ -127,7 +136,7 @@ public class Redbox {
 		frmWelcomeToRedbox = new JFrame();
 		frmWelcomeToRedbox.setTitle("Welcome to RedBox!");
 		frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
-		//frmWelcomeToRedbox.setBounds(100, 100, 636, 426);
+		//frmWelcomeToRedbox.setBounds(100, 100, 800, 800);
 		frmWelcomeToRedbox.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmWelcomeToRedbox.getContentPane().setLayout(new CardLayout(0, 0));
 		//frmWelcomeToRedbox.setBounds(100, 100, 500, 250);
@@ -281,7 +290,7 @@ public class Redbox {
 				ReturnGUI.setVisible(true);
 				RedBox.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Return");
-				frmWelcomeToRedbox.setBounds(100, 100, 415, 240);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 
 				
 				
@@ -296,7 +305,7 @@ public class Redbox {
 				RedBox.setVisible(false);
 				AdminHomeGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Admin Home");
-				frmWelcomeToRedbox.setBounds(100, 100, 375, 145);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -308,13 +317,24 @@ public class Redbox {
 		JButton btnRegisterNow = new JButton("Register Now!");
 		btnRegisterNow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				firstNameTextField.setText(null);
+				lastNameTextField.setText(null);
+				IDTextField.setText(null);
+				emailTextField.setText(null);
+				addressTextField.setText(null);
+				cityTextField.setText(null);
+				stateTextField.setText(null);
+				zipTextField.setText(null);
+				balanceTextField.setText(null);
+				passwordTextField.setText(null);
+				checkPasswordTextField.setText(null);		
+				phoneNumberTextField.setText(null);
+				
 				RedBox.setVisible(false);
 				NewUserGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Welcome to RedBox!");
-				frmWelcomeToRedbox.setBounds(100, 100, 380, 440);
-				
-				
-				
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);			
 			}
 		});
 		btnRegisterNow.setBounds(275, 80, 154, 23);
@@ -330,7 +350,7 @@ public class Redbox {
 				AccountsGUI.setVisible(true);
 				AdminHomeGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Accounts");
-				frmWelcomeToRedbox.setBounds(100, 100, 340, 400);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -346,7 +366,7 @@ public class Redbox {
 				InventoryAdminGUI.setVisible(true);
 				AdminHomeGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
-				frmWelcomeToRedbox.setBounds(100, 100, 600, 465);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -361,7 +381,7 @@ public class Redbox {
 				RedBox.setVisible(true);
 				AdminHomeGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Welcome to RedBox!");
-				frmWelcomeToRedbox.setBounds(100, 100, 500, 250);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -376,7 +396,7 @@ public class Redbox {
 		AccountsGUI.add(lblCurrentAccounts);
 		
 		JList list = new JList();
-		list.setBounds(29, 49, 169, 215);
+		list.setBounds(29, 49, 415, 210);
 		AccountsGUI.add(list);
 		
 		JButton btnViewDetails = new JButton("View Details");
@@ -385,14 +405,14 @@ public class Redbox {
 				AccountDetailsAsAdminGUI.setVisible(true);
 				AccountsGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Accounts");
-				frmWelcomeToRedbox.setBounds(100, 100, 370, 425);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
 				
 			}
 		});
-		btnViewDetails.setBounds(208, 113, 106, 23);
+		btnViewDetails.setBounds(208, 286, 119, 23);
 		AccountsGUI.add(btnViewDetails);
 		
 		JButton btnDelete = new JButton("Delete");
@@ -403,7 +423,7 @@ public class Redbox {
 				
 			}
 		});
-		btnDelete.setBounds(208, 162, 106, 23);
+		btnDelete.setBounds(352, 286, 106, 23);
 		AccountsGUI.add(btnDelete);
 		
 		JButton btnAdminHome = new JButton("Back/Admin Home");
@@ -412,14 +432,23 @@ public class Redbox {
 				AccountsGUI.setVisible(false);
 				AdminHomeGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Admin Home");
-				frmWelcomeToRedbox.setBounds(100, 100, 375, 145);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
 			}
 		});
-		btnAdminHome.setBounds(71, 311, 176, 23);
+		btnAdminHome.setBounds(282, 349, 176, 23);
 		AccountsGUI.add(btnAdminHome);
+		
+		JLabel lblId_1 = new JLabel("I.D.");
+		lblId_1.setBounds(29, 287, 69, 20);
+		AccountsGUI.add(lblId_1);
+		
+		textField = new JTextField();
+		textField.setBounds(62, 284, 119, 26);
+		AccountsGUI.add(textField);
+		textField.setColumns(10);
 		
 		JLabel lblName = new JLabel("Name:");
 		lblName.setBounds(47, 35, 89, 14);
@@ -491,7 +520,7 @@ public class Redbox {
 				AccountDetailsAsAdminGUI.setVisible(false);
 				AccountsGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Acounts");
-				frmWelcomeToRedbox.setBounds(100, 100, 340, 400);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -506,7 +535,7 @@ public class Redbox {
 				AccountDetailsAsAdminGUI.setVisible(false);
 				AdminHomeGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Admin Home");
-				frmWelcomeToRedbox.setBounds(100, 100, 375, 145);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -521,16 +550,8 @@ public class Redbox {
 		InventoryAdminGUI.add(lblCurrentInventory);
 		
 		JList DVDlist = new JList();
-		DVDlist.setBounds(20, 59, 148, 174);
+		DVDlist.setBounds(20, 59, 225, 209);
 		InventoryAdminGUI.add(DVDlist);
-		
-		JLabel lblStatus = new JLabel("Status:");
-		lblStatus.setBounds(41, 266, 46, 14);
-		InventoryAdminGUI.add(lblStatus);
-		
-		JLabel lblgetstatus = new JLabel("\"getStatus()\"");
-		lblgetstatus.setBounds(97, 266, 148, 14);
-		InventoryAdminGUI.add(lblgetstatus);
 		
 		JButton btnAddItem = new JButton("Add Item");
 		btnAddItem.addActionListener(new ActionListener() {
@@ -538,13 +559,13 @@ public class Redbox {
 				addTypeGUI.setVisible(true);
 				InventoryAdminGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Type?");
-				frmWelcomeToRedbox.setBounds(100, 100, 285, 230);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
 			}
 		});
-		btnAddItem.setBounds(102, 317, 105, 23);
+		btnAddItem.setBounds(403, 372, 105, 23);
 		InventoryAdminGUI.add(btnAddItem);
 		
 		JButton btnRemoveItem = new JButton("Remove Item");
@@ -556,16 +577,16 @@ public class Redbox {
 				
 			}
 		});
-		btnRemoveItem.setBounds(242, 317, 123, 23);
+		btnRemoveItem.setBounds(385, 302, 123, 23);
 		InventoryAdminGUI.add(btnRemoveItem);
 		
 		JButton btnBackadminHome = new JButton("Back/Admin Home");
 		btnBackadminHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				editItemGUI.setVisible(false);
+				InventoryAdminGUI.setVisible(false);
 				AdminHomeGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Admin Home");
-				frmWelcomeToRedbox.setBounds(100, 100, 375, 145);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -581,31 +602,32 @@ public class Redbox {
 				InventoryAdminGUI.setVisible(false);
 				editItemGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Edit + 'getItemTitle()' maybe");
-				frmWelcomeToRedbox.setBounds(100, 100, 610, 325);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 			}
 		});
-		btnEditItem.setBounds(403, 317, 105, 23);
+		btnEditItem.setBounds(252, 302, 105, 23);
 		InventoryAdminGUI.add(btnEditItem);
 		
-		JLabel lblDvd = new JLabel("DVDs:");
+		JLabel lblDvd = new JLabel("Movies:");
 		lblDvd.setBounds(20, 34, 46, 14);
 		InventoryAdminGUI.add(lblDvd);
 		
-		JLabel lblBluerays = new JLabel("Blurays:");
-		lblBluerays.setBounds(212, 34, 46, 14);
-		InventoryAdminGUI.add(lblBluerays);
-		
-		JList BlurayList = new JList();
-		BlurayList.setBounds(212, 59, 148, 174);
-		InventoryAdminGUI.add(BlurayList);
-		
 		JList GamesList = new JList();
-		GamesList.setBounds(403, 59, 148, 174);
+		GamesList.setBounds(291, 59, 225, 209);
 		InventoryAdminGUI.add(GamesList);
 		
 		JLabel lblGames = new JLabel("Games:");
-		lblGames.setBounds(403, 34, 46, 14);
+		lblGames.setBounds(291, 34, 46, 14);
 		InventoryAdminGUI.add(lblGames);
+		
+		JLabel lblId_2 = new JLabel("I.D. ");
+		lblId_2.setBounds(81, 303, 69, 20);
+		InventoryAdminGUI.add(lblId_2);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(117, 300, 105, 26);
+		InventoryAdminGUI.add(textField_1);
+		textField_1.setColumns(10);
 		
 		JLabel lblChooseType = new JLabel("Choose type of item to add: ");
 		lblChooseType.setBounds(32, 44, 198, 14);
@@ -617,7 +639,7 @@ public class Redbox {
 				addTypeGUI.setVisible(false);
 				addMovieGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Add Movie");
-				frmWelcomeToRedbox.setBounds(100, 100, 360, 335);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -633,7 +655,7 @@ public class Redbox {
 				addTypeGUI.setVisible(false);
 				addGameGUI.setVisible(true);
 				frmWelcomeToRedbox.setTitle("Add Game");
-				frmWelcomeToRedbox.setBounds(100, 100, 360, 335);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -648,7 +670,7 @@ public class Redbox {
 				InventoryAdminGUI.setVisible(true);
 				addTypeGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
-				frmWelcomeToRedbox.setBounds(100, 100, 600, 465);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -664,7 +686,7 @@ public class Redbox {
 				AdminHomeGUI.setVisible(true);
 				addTypeGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Admin Home");
-				frmWelcomeToRedbox.setBounds(100, 100, 375, 145);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -716,7 +738,7 @@ public class Redbox {
 				InventoryAdminGUI.setVisible(true);
 				addMovieGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
-				frmWelcomeToRedbox.setBounds(100, 100, 600, 465);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -731,7 +753,7 @@ public class Redbox {
 				InventoryAdminGUI.setVisible(true);
 				addMovieGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
-				frmWelcomeToRedbox.setBounds(100, 100, 600, 465);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				JOptionPane.showMessageDialog(null, "Action not implemented yet!!!");
 				
 				
@@ -796,7 +818,7 @@ public class Redbox {
 				InventoryAdminGUI.setVisible(true);
 				addGameGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
-				frmWelcomeToRedbox.setBounds(100, 100, 600, 465);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -811,7 +833,7 @@ public class Redbox {
 				InventoryAdminGUI.setVisible(true);
 				addGameGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
-				frmWelcomeToRedbox.setBounds(100, 100, 600, 465);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				JOptionPane.showMessageDialog(null, "Action not implemented yet!!!");
 				
 				
@@ -896,7 +918,7 @@ public class Redbox {
 				InventoryAdminGUI.setVisible(true);
 				editItemGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
-				frmWelcomeToRedbox.setBounds(100, 100, 600, 465);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				JOptionPane.showMessageDialog(null, "Action not implemented yet!!!");
 				
 				
@@ -909,10 +931,11 @@ public class Redbox {
 		JButton btnBackCancel = new JButton("Back/Cancel");
 		btnBackCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textField_1.setText(null);
 				InventoryAdminGUI.setVisible(true);
 				editItemGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
-				frmWelcomeToRedbox.setBounds(100, 100, 600, 465);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -980,7 +1003,7 @@ public class Redbox {
 				RedBox.setVisible(true);
 				NewUserGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Welcome to RedBox!");
-				frmWelcomeToRedbox.setBounds(100, 100, 500, 250);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -1119,7 +1142,7 @@ public class Redbox {
 				RedBox.setVisible(true);
 				ReturnGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Welcome to RedBox!");
-				frmWelcomeToRedbox.setBounds(100, 100, 500, 250);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -1135,7 +1158,7 @@ public class Redbox {
 				RedBox.setVisible(true);
 				ReturnGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Welcome to RedBox!");
-				frmWelcomeToRedbox.setBounds(100, 100, 500, 250);
+				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 				
 				
 				
@@ -1153,7 +1176,11 @@ public class Redbox {
 		gbc_lblFirstName_1.gridy = 1;
 		UserAccountInfoGUI.add(lblFirstName_1, gbc_lblFirstName_1);
 		
+<<<<<<< HEAD
 		JLabel lblGetname = new JLabel("getFirstName()");
+=======
+		final JLabel lblGetname = new JLabel("getName()");
+>>>>>>> 076ff7faafabc71790d029e243241021f49cbb88
 		GridBagConstraints gbc_lblGetname = new GridBagConstraints();
 		gbc_lblGetname.anchor = GridBagConstraints.WEST;
 		gbc_lblGetname.insets = new Insets(0, 0, 5, 5);
@@ -1185,7 +1212,7 @@ public class Redbox {
 		gbc_label_9.gridy = 3;
 		UserAccountInfoGUI.add(label_9, gbc_label_9);
 		
-		JLabel lblGetusername_1 = new JLabel("getUsername()");
+		final JLabel lblGetusername_1 = new JLabel("getUsername()");
 		GridBagConstraints gbc_lblGetusername_1 = new GridBagConstraints();
 		gbc_lblGetusername_1.anchor = GridBagConstraints.WEST;
 		gbc_lblGetusername_1.insets = new Insets(0, 0, 5, 5);
@@ -1201,7 +1228,7 @@ public class Redbox {
 		gbc_label_10.gridy = 4;
 		UserAccountInfoGUI.add(label_10, gbc_label_10);
 		
-		JLabel lblGetemail = new JLabel("getEmail()");
+		final JLabel lblGetemail = new JLabel("getEmail()");
 		GridBagConstraints gbc_lblGetemail = new GridBagConstraints();
 		gbc_lblGetemail.anchor = GridBagConstraints.WEST;
 		gbc_lblGetemail.insets = new Insets(0, 0, 5, 5);
@@ -1233,6 +1260,7 @@ public class Redbox {
 		gbc_label_11.gridy = 6;
 		UserAccountInfoGUI.add(label_11, gbc_label_11);
 		
+<<<<<<< HEAD
 		JLabel lblBalance = new JLabel("Balance");
 		GridBagConstraints gbc_lblBalance = new GridBagConstraints();
 		gbc_lblBalance.anchor = GridBagConstraints.BELOW_BASELINE;
@@ -1241,6 +1269,29 @@ public class Redbox {
 		gbc_lblBalance.gridx = 1;
 		gbc_lblBalance.gridy = 12;
 		UserEditAccountInfoGUI.add(lblBalance, gbc_lblBalance);
+=======
+		final JLabel lblGetaddress_1 = new JLabel("getAddress()");
+		GridBagConstraints gbc_lblGetaddress_1 = new GridBagConstraints();
+		gbc_lblGetaddress_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblGetaddress_1.gridx = 3;
+		gbc_lblGetaddress_1.gridy = 4;
+		UserAccountInfoGUI.add(lblGetaddress_1, gbc_lblGetaddress_1);
+		
+		JLabel label_13 = new JLabel("City:");
+		GridBagConstraints gbc_label_13 = new GridBagConstraints();
+		gbc_label_13.anchor = GridBagConstraints.NORTHWEST;
+		gbc_label_13.insets = new Insets(0, 0, 5, 5);
+		gbc_label_13.gridx = 1;
+		gbc_label_13.gridy = 5;
+		UserAccountInfoGUI.add(label_13, gbc_label_13);
+		
+		final JLabel lblGetcity_1 = new JLabel("getCity()");
+		GridBagConstraints gbc_lblGetcity_1 = new GridBagConstraints();
+		gbc_lblGetcity_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblGetcity_1.gridx = 3;
+		gbc_lblGetcity_1.gridy = 5;
+		UserAccountInfoGUI.add(lblGetcity_1, gbc_lblGetcity_1);
+>>>>>>> 076ff7faafabc71790d029e243241021f49cbb88
 		
 		JLabel label_12 = new JLabel("$");
 		GridBagConstraints gbc_label_12 = new GridBagConstraints();
@@ -1249,7 +1300,7 @@ public class Redbox {
 		gbc_label_12.gridy = 12;
 		UserEditAccountInfoGUI.add(label_12, gbc_label_12);
 		
-		JLabel lblGetstate_1 = new JLabel("getState()");
+		final JLabel lblGetstate_1 = new JLabel("getState()");
 		GridBagConstraints gbc_lblGetstate_1 = new GridBagConstraints();
 		gbc_lblGetstate_1.anchor = GridBagConstraints.WEST;
 		gbc_lblGetstate_1.insets = new Insets(0, 0, 5, 5);
@@ -1265,7 +1316,7 @@ public class Redbox {
 		gbc_label_15.gridy = 9;
 		UserAccountInfoGUI.add(label_15, gbc_label_15);
 		
-		JLabel lblGetzipcode = new JLabel("getZipcode()");
+		final JLabel lblGetzipcode = new JLabel("getZipcode()");
 		GridBagConstraints gbc_lblGetzipcode = new GridBagConstraints();
 		gbc_lblGetzipcode.anchor = GridBagConstraints.WEST;
 		gbc_lblGetzipcode.insets = new Insets(0, 0, 5, 5);
@@ -1273,7 +1324,7 @@ public class Redbox {
 		gbc_lblGetzipcode.gridy = 9;
 		UserAccountInfoGUI.add(lblGetzipcode, gbc_lblGetzipcode);
 		
-		JLabel lblPassword_2 = new JLabel("Password:");
+		final JLabel lblPassword_2 = new JLabel("Password:");
 		GridBagConstraints gbc_lblPassword_2 = new GridBagConstraints();
 		gbc_lblPassword_2.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblPassword_2.insets = new Insets(0, 0, 5, 5);
@@ -1282,7 +1333,7 @@ public class Redbox {
 		gbc_lblPassword_2.gridy = 10;
 		UserAccountInfoGUI.add(lblPassword_2, gbc_lblPassword_2);
 		
-		JLabel lblGetpassword = new JLabel("getPassword()");
+		final JLabel lblGetpassword = new JLabel("getPassword()");
 		GridBagConstraints gbc_lblGetpassword = new GridBagConstraints();
 		gbc_lblGetpassword.anchor = GridBagConstraints.WEST;
 		gbc_lblGetpassword.insets = new Insets(0, 0, 5, 5);
@@ -1306,7 +1357,7 @@ public class Redbox {
 		gbc_label_18.gridy = 11;
 		UserAccountInfoGUI.add(label_18, gbc_label_18);
 		
-		JLabel lblGetbalance = new JLabel("getBalance()");
+		final JLabel lblGetbalance = new JLabel("getBalance()");
 		GridBagConstraints gbc_lblGetbalance = new GridBagConstraints();
 		gbc_lblGetbalance.anchor = GridBagConstraints.WEST;
 		gbc_lblGetbalance.insets = new Insets(0, 0, 5, 5);
@@ -1371,6 +1422,7 @@ public class Redbox {
 		JButton btnNewButton_1 = new JButton("Rent Movie");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				currentRentable = "Movie";
 				btnRentGettype.setText("Rent Movie");
 				RentByGUI.setVisible(true);
 				UserHomeGUI.setVisible(false);
@@ -1403,6 +1455,8 @@ public class Redbox {
 				currentUser = null;
 				RedBox.setVisible(true);
 				UserHomeGUI.setVisible(false);
+				passwordField.setText(null);
+				usernameTextField.setText(null);
 			}
 		});
 		btnNewButton_3.setBounds(330, 231, 160, 23);
@@ -1411,6 +1465,7 @@ public class Redbox {
 		JButton btnRentGame = new JButton("Rent Video Game");
 		btnRentGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				currentRentable = "VideoGame";
 				btnRentGettype.setText("Rent Video Game");
 				RentByGUI.setVisible(true);
 				UserHomeGUI.setVisible(false);
@@ -1748,9 +1803,34 @@ public class Redbox {
 		button_3.setBounds(38, 116, 89, 23);
 		UserReturnGUI.add(button_3);
 		
+		JTextArea rentablesTextArea = new JTextArea();
+		rentablesTextArea.setBounds(56, 55, 245, 231);
+		rentablesTextArea.setEditable(false);
+		ViewRentablesGUI.add(rentablesTextArea);
+		
 		JButton btnCategorizeByTitle = new JButton("Categorize by Title");
 		btnCategorizeByTitle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (currentRentable == "Movie"){
+					currentMovieList = rbMethods.sortMovieByTitle(movieMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (Movie mov : currentMovieList){
+						if (mov.getRentedStatus() == false){
+							rentablesTextArea.append(mov.getID()+"-"+mov.getTitle()+"-"+mov.getMovieRating()+"-"+mov.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
+				if (currentRentable == "VideoGame"){
+					currentVideoGameList = rbMethods.sortVideoGameByTitle(videogameMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (VideoGame vg : currentVideoGameList){
+						if (vg.getRentedStatus() == false){
+						rentablesTextArea.append(vg.getID()+"-"+vg.getTitle()+"-"+vg.getVideoGameRating()+"-"+vg.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
 				lblGetcategory.setText("Sorted by Title");
 				RentByGUI.setVisible(false);
 				ViewRentablesGUI.setVisible(true);
@@ -1764,6 +1844,26 @@ public class Redbox {
 		JButton btnCategorizeByGenre = new JButton("Categorize by Genre");
 		btnCategorizeByGenre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (currentRentable == "Movie"){
+					currentMovieList = rbMethods.sortMovieByCategory(movieMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Category - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (Movie mov : currentMovieList){
+						if (mov.getRentedStatus() == false){
+						rentablesTextArea.append(mov.getID()+"-"+mov.getTitle()+"-"+mov.getMovieCategory()+"-"+mov.getMovieRating()+"-"+mov.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
+				if (currentRentable == "VideoGame"){
+					currentVideoGameList = rbMethods.sortVideoGameByCategory(videogameMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (VideoGame vg : currentVideoGameList){
+						if (vg.getRentedStatus() == false){
+						rentablesTextArea.append(vg.getID()+"-"+vg.getTitle()+"-"+vg.getVideoGameRating()+"-"+vg.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
 				lblGetcategory.setText("Sorted by Genre");
 				RentByGUI.setVisible(false);
 				ViewRentablesGUI.setVisible(true);
@@ -1775,6 +1875,26 @@ public class Redbox {
 		JButton btnCategorizeByRating = new JButton("Categorize by Rating");
 		btnCategorizeByRating.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (currentRentable == "Movie"){
+					currentMovieList = rbMethods.sortMovieByRating(movieMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (Movie mov : currentMovieList){
+						if (mov.getRentedStatus() == false){
+						rentablesTextArea.append(mov.getID()+"-"+mov.getTitle()+"-"+mov.getMovieRating()+"-"+mov.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
+				if (currentRentable == "VideoGame"){
+					currentVideoGameList = rbMethods.sortVideoGameByRating(videogameMap);
+					rentablesTextArea.setText("");
+					rentablesTextArea.append(" ID - Title - Rating - Price "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+					for (VideoGame vg : currentVideoGameList){
+						if (vg.getRentedStatus() == false){
+						rentablesTextArea.append(vg.getID()+"-"+vg.getTitle()+"-"+vg.getVideoGameRating()+"-"+vg.getPrice()+System.getProperty("line.separator"));
+						}
+					}
+				}
 				lblGetcategory.setText("Sorted by Rating");
 				RentByGUI.setVisible(false);
 				ViewRentablesGUI.setVisible(true);
@@ -1793,10 +1913,6 @@ public class Redbox {
 		btnBack_5.setBounds(303, 179, 160, 23);
 		RentByGUI.add(btnBack_5);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(56, 55, 245, 231);
-		ViewRentablesGUI.add(textArea);
-		
 		JLabel lblId = new JLabel("I.D.");
 		lblId.setBounds(66, 326, 26, 14);
 		ViewRentablesGUI.add(lblId);
@@ -1805,8 +1921,6 @@ public class Redbox {
 		textField_20.setBounds(91, 323, 51, 20);
 		ViewRentablesGUI.add(textField_20);
 		textField_20.setColumns(10);
-		
-		// Test
 		
 		JButton btnBack_6 = new JButton("Back");
 		btnBack_6.addActionListener(new ActionListener() {
