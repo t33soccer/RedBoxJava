@@ -94,14 +94,11 @@ public class Redbox {
 	private String currentRentable;
 	private JTextField firstNameTextField;
 	private JTextField phoneNumberTextField;
-<<<<<<< HEAD
 	private JTextField editConfirmNewPasswordTextField;
 	private JTextField editPhoneNumberTextField;
 	private JTextField editLastNameTextField;
-=======
 	private JTextField textField;
 	private JTextField textField_1;
->>>>>>> 076ff7faafabc71790d029e243241021f49cbb88
 
 	/**
 	 * Launch the application.
@@ -1176,11 +1173,7 @@ public class Redbox {
 		gbc_lblFirstName_1.gridy = 1;
 		UserAccountInfoGUI.add(lblFirstName_1, gbc_lblFirstName_1);
 		
-<<<<<<< HEAD
 		JLabel lblGetname = new JLabel("getFirstName()");
-=======
-		final JLabel lblGetname = new JLabel("getName()");
->>>>>>> 076ff7faafabc71790d029e243241021f49cbb88
 		GridBagConstraints gbc_lblGetname = new GridBagConstraints();
 		gbc_lblGetname.anchor = GridBagConstraints.WEST;
 		gbc_lblGetname.insets = new Insets(0, 0, 5, 5);
@@ -1260,7 +1253,6 @@ public class Redbox {
 		gbc_label_11.gridy = 6;
 		UserAccountInfoGUI.add(label_11, gbc_label_11);
 		
-<<<<<<< HEAD
 		JLabel lblBalance = new JLabel("Balance");
 		GridBagConstraints gbc_lblBalance = new GridBagConstraints();
 		gbc_lblBalance.anchor = GridBagConstraints.BELOW_BASELINE;
@@ -1269,29 +1261,6 @@ public class Redbox {
 		gbc_lblBalance.gridx = 1;
 		gbc_lblBalance.gridy = 12;
 		UserEditAccountInfoGUI.add(lblBalance, gbc_lblBalance);
-=======
-		final JLabel lblGetaddress_1 = new JLabel("getAddress()");
-		GridBagConstraints gbc_lblGetaddress_1 = new GridBagConstraints();
-		gbc_lblGetaddress_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetaddress_1.gridx = 3;
-		gbc_lblGetaddress_1.gridy = 4;
-		UserAccountInfoGUI.add(lblGetaddress_1, gbc_lblGetaddress_1);
-		
-		JLabel label_13 = new JLabel("City:");
-		GridBagConstraints gbc_label_13 = new GridBagConstraints();
-		gbc_label_13.anchor = GridBagConstraints.NORTHWEST;
-		gbc_label_13.insets = new Insets(0, 0, 5, 5);
-		gbc_label_13.gridx = 1;
-		gbc_label_13.gridy = 5;
-		UserAccountInfoGUI.add(label_13, gbc_label_13);
-		
-		final JLabel lblGetcity_1 = new JLabel("getCity()");
-		GridBagConstraints gbc_lblGetcity_1 = new GridBagConstraints();
-		gbc_lblGetcity_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblGetcity_1.gridx = 3;
-		gbc_lblGetcity_1.gridy = 5;
-		UserAccountInfoGUI.add(lblGetcity_1, gbc_lblGetcity_1);
->>>>>>> 076ff7faafabc71790d029e243241021f49cbb88
 		
 		JLabel label_12 = new JLabel("$");
 		GridBagConstraints gbc_label_12 = new GridBagConstraints();
