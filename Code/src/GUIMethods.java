@@ -25,7 +25,6 @@ public class GUIMethods {
 	public Map<String,User> loadUserAccountsMap() throws IOException{
 		Map<String,User> loginUserMap = new HashMap<String,User>();
 		
-		BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Trey\\Documents\\GitHub\\RedBoxJava\\Code\\src\\userData.txt"));
 		
 		String line = "";
 		
@@ -62,7 +61,6 @@ public class GUIMethods {
 	}
 	//saves all known user from a loaded map
 	public void returnUserMap(Map<String,User> myMap) throws IOException{
-		File outFile = new File("C:\\Users\\Trey\\Documents\\GitHub\\RedBoxJava\\Code\\src\\userData.txt");
 		outFile.createNewFile();
 		FileWriter outWriter = new FileWriter(outFile);
 		Collection<User> c = myMap.values();
@@ -202,7 +200,6 @@ public class GUIMethods {
 	}
 	//returns all known movies given a movie map
 	public void returnMovieMap(Map<String,Movie> myMap) throws IOException{
-		File outFile = new File("C:\\Users\\Trey\\Documents\\GitHub\\RedBoxJava\\Code\\src\\movieData.txt");
 		outFile.createNewFile();
 		FileWriter outWriter = new FileWriter(outFile);
 		Collection<Movie> c = myMap.values();
@@ -253,7 +250,6 @@ public class GUIMethods {
 	public Map<String,VideoGame> loadVideoGameMap() throws NumberFormatException, IOException{
 		Map<String,VideoGame> videogameMap = new HashMap<String,VideoGame>();
 		
-		BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Trey\\Documents\\GitHub\\RedBoxJava\\Code\\src\\videogameData.txt"));
 		
 		String line = "";
 		
@@ -272,7 +268,6 @@ public class GUIMethods {
 	}
 	//returns all known video games from hash map to file
 	public void returnVideoGameMap(Map<String,VideoGame> myMap) throws IOException{
-		File outFile = new File("C:\\Users\\Trey\\Documents\\GitHub\\RedBoxJava\\Code\\src\\videogameData.txt");
 		outFile.createNewFile();
 		FileWriter outWriter = new FileWriter(outFile);
 		Collection<VideoGame> c = myMap.values();
