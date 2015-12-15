@@ -114,6 +114,10 @@ public class User implements LoginInterface{
 		this.userBalance = setBalanceDouble;
 	}
 	
+	public Map<String, RentableInterface> returnRentables(){
+		return this.currentRentables;
+	}
+	
 	public void rentAdd(RentableInterface myRentable){
 		myRentable.setRentedStatus(true);
 		currentRentables.put(myRentable.getID(), myRentable);

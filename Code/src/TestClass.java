@@ -10,13 +10,13 @@ public class TestClass {
 		// TODO Auto-generated method stub
 		GUIMethods myMethods = new GUIMethods();
 		
-		Map<String, User> userMap = myMethods.loadUserAccountsMap();
-		
-		User user1 = (User) userMap.get("wardj");
-		System.out.println(user1.getPassword());
-		char[] charArray = user1.getPassword().toCharArray();
-		System.out.println(charArray);
-		System.out.println(String.valueOf(charArray));
+//		Map<String, User> userMap = myMethods.loadUserAccountsMap();
+//		
+//		User user1 = (User) userMap.get("wardj");
+//		System.out.println(user1.getPassword());
+//		char[] charArray = user1.getPassword().toCharArray();
+//		System.out.println(charArray);
+//		System.out.println(String.valueOf(charArray));
 		
 //		Map<String, Movie> movieMap = myMethods.loadMovieMap();
 //		Movie inMovie = (Movie) movieMap.get("000");
@@ -35,8 +35,8 @@ public class TestClass {
 //			vg.displayVideoGameInfo();
 //		}
 		
-//		Map<String, User> userMap = myMethods.loadUserAccountsMap();
-//		User user1 = (User) userMap.get("wardj");
+		Map<String, User> userMap = myMethods.loadUserAccountsMap();
+		myMethods.returnUserMap(userMap);
 //		user1.displayUserInfo();
 //		System.out.println(user1.getFirstName());
 //		System.out.println(inMovie.getRentedStatus());

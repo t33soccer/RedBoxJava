@@ -23,6 +23,9 @@ public class GUIMethods {
 		
 		String line = "";
 		
+		Map <String,Movie> tempMovieMap = this.loadMovieMap();
+		Map <String,VideoGame> tempVideoGameMap = this.loadVideoGameMap();
+		
 		while ((line = in.readLine()) != null){
 			String parts[] = line.split("-");
 			User temp = new User(parts[0],parts[1]);
@@ -36,6 +39,17 @@ public class GUIMethods {
 			temp.setEmail(parts[9]);
 			temp.setPhoneNumber(parts[10]);
 			temp.setBalance(Double.parseDouble(parts[11]));
+			System.out.println(temp.getID());
+			if (parts[12].equals(" ")){
+				System.out.println("hit nothing");
+			}else{
+				temp.rentAdd(tempMovieMap.get(parts[12]));
+			}
+			if (parts[13].equals(" ")){
+				System.out.println("hit nothing");
+			}else{
+				temp.rentAdd(tempVideoGameMap.get(parts[13]));
+			}
 			loginUserMap.put(parts[0],temp);
 		}
 		in.close();
@@ -49,7 +63,9 @@ public class GUIMethods {
 		Collection<User> c = myMap.values();
 		final Iterator<User> itr = c.iterator();
 		User myEntry = (User) itr.next();
+		Map<String,RentableInterface> tempMap = myEntry.returnRentables();
 		while(itr.hasNext()){
+			tempMap = myEntry.returnRentables();
 			outWriter.write(myEntry.getID());
 			outWriter.write("-");
 			outWriter.write(myEntry.getPassword());
@@ -73,9 +89,39 @@ public class GUIMethods {
 			outWriter.write(myEntry.getPhoneNumber());
 			outWriter.write("-");
 			outWriter.write(String.valueOf(myEntry.getBalance()));
+			outWriter.write("-");
+			if (tempMap.values().isEmpty()){
+				outWriter.write(" ");
+				outWriter.write("-");
+				outWriter.write(" ");
+			}else{
+				for (RentableInterface ri : tempMap.values()){
+					if (tempMap.values().size() == 1){
+						if (ri.getClass().equals(Movie.class)){
+							outWriter.write(ri.getID());
+							outWriter.write("-");
+							outWriter.write(" ");
+						}else if(ri.getClass().equals(VideoGame.class)){
+							outWriter.write(" ");
+							outWriter.write("-");
+							outWriter.write(ri.getID());
+						}
+					}else if(tempMap.values().size() == 2){
+						if (ri.getClass().equals(Movie.class)){
+							outWriter.write(ri.getID());
+							outWriter.write("-");
+						}else if(ri.getClass().equals(VideoGame.class)){
+							outWriter.write(ri.getID());
+						}
+					}
+				}		
+			}
+			tempMap = null;
 			outWriter.write(System.getProperty("line.separator"));
+			System.out.println("next");
 			myEntry = (User) itr.next();
 		}
+		tempMap = myEntry.returnRentables();
 		outWriter.write(myEntry.getID());
 		outWriter.write("-");
 		outWriter.write(myEntry.getPassword());
@@ -99,6 +145,33 @@ public class GUIMethods {
 		outWriter.write(myEntry.getPhoneNumber());
 		outWriter.write("-");
 		outWriter.write(String.valueOf(myEntry.getBalance()));
+		outWriter.write("-");
+		if (tempMap.values().isEmpty()){
+			outWriter.write(" ");
+			outWriter.write("-");
+			outWriter.write(" ");
+		}else{
+			for (RentableInterface ri : tempMap.values()){
+				if (tempMap.values().size() == 1){
+					if (ri.getClass().equals(Movie.class)){
+						outWriter.write(ri.getID());
+						outWriter.write("-");
+						outWriter.write(" ");
+					}else if(ri.getClass().equals(VideoGame.class)){
+						outWriter.write(" ");
+						outWriter.write("-");
+						outWriter.write(ri.getID());
+					}
+				}else if(tempMap.values().size() == 2){
+					if (ri.getClass().equals(Movie.class)){
+						outWriter.write(ri.getID());
+						outWriter.write("-");
+					}else if(ri.getClass().equals(VideoGame.class)){
+						outWriter.write(ri.getID());
+					}
+				}
+			}		
+		}
 		outWriter.flush();
 		outWriter.close();
 	}
@@ -241,6 +314,24 @@ public class GUIMethods {
 		outWriter.write(myEntry.getVideoGamePlatform());
 		outWriter.flush();
 		outWriter.close();
+	}
+	
+	public ArrayList<User> sortAccounts(Map<String,User> myMap){
+		ArrayList<User> sortedList = new ArrayList<User>(myMap.values());
+		 Collections.sort(sortedList, new Comparator<User>() {
+
+				@Override
+				public int compare(User us1, User us2) {
+					String str1 = us1.getFirstName();
+					String str2 = us2.getFirstName();
+			        int res = String.CASE_INSENSITIVE_ORDER.compare(str1, str2);
+			        if (res == 0) {
+			            res = str1.compareTo(str2);
+			        }
+			        return res;
+				}
+		    });
+		return sortedList;
 	}
 	
 	public ArrayList<Movie> sortMovieByTitle(Map<String,Movie> myMap){
