@@ -39,14 +39,13 @@ public class GUIMethods {
 			temp.setEmail(parts[9]);
 			temp.setPhoneNumber(parts[10]);
 			temp.setBalance(Double.parseDouble(parts[11]));
-			System.out.println(temp.getID());
 			if (parts[12].equals(" ")){
-				System.out.println("hit nothing");
+				// do nothing
 			}else{
 				temp.rentAdd(tempMovieMap.get(parts[12]));
 			}
 			if (parts[13].equals(" ")){
-				System.out.println("hit nothing");
+				// do nothing
 			}else{
 				temp.rentAdd(tempVideoGameMap.get(parts[13]));
 			}
@@ -118,7 +117,6 @@ public class GUIMethods {
 			}
 			tempMap = null;
 			outWriter.write(System.getProperty("line.separator"));
-			System.out.println("next");
 			myEntry = (User) itr.next();
 		}
 		tempMap = myEntry.returnRentables();

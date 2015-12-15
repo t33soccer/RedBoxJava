@@ -80,12 +80,13 @@ public class Redbox {
 	private JTextField editBalanceTextField;
 	private JTextField editZipCodeTextField;
 	private JTextField editNewPasswordTextField;
-	private JTextField textField_18;
+	private JTextField userReturnIDTextField;
 	private JTextField rentableIDTextField;
 	
 	private static Map<String,User> userMap;
 	private static Map<String,Movie> movieMap;
 	private static Map<String,VideoGame> videogameMap;
+	private static Map<String,RentableInterface> rentablesMap;
 	private User currentUser;
 	private User detailUser;
 	private static GUIMethods rbMethods = new GUIMethods();
@@ -99,7 +100,7 @@ public class Redbox {
 	private JTextField editPhoneNumberTextField;
 	private JTextField editLastNameTextField;
 	private JTextField idTextBox;
-	private JTextField textField_1;
+	private JTextField editRemvoeID;
 
 	/**
 	 * Launch the application.
@@ -256,6 +257,7 @@ public class Redbox {
 				else if (userMap.get(usernameTextField.getText()) != null){
 					if (String.valueOf(passwordField.getPassword()).equals(userMap.get(usernameTextField.getText()).getPassword())){
 						currentUser = userMap.get(usernameTextField.getText());
+						rentablesMap = currentUser.returnRentables();
 						RedBox.setVisible(false);
 						UserHomeGUI.setVisible(true);
 					}
@@ -279,6 +281,8 @@ public class Redbox {
 					else{
 						currentUser.rentAdd(movieMap.get(rentableIDTextField.getText()));
 						rentableIDTextField.setText("");
+						ViewRentablesGUI.setVisible(false);
+						RentByGUI.setVisible(true);
 					}
 				}
 			}
@@ -385,9 +389,29 @@ public class Redbox {
 		btnViewAccounts.setBounds(51, 24, 124, 23);
 		AdminHomeGUI.add(btnViewAccounts);
 		
+		JTextArea movieInventoryTextArea = new JTextArea();
+		movieInventoryTextArea.setEditable(false);
+		movieInventoryTextArea.setBounds(20, 55, 261, 213);
+		InventoryAdminGUI.add(movieInventoryTextArea);
+		
+		JTextArea videogameInventroyTextArea = new JTextArea();
+		videogameInventroyTextArea.setEditable(false);
+		videogameInventroyTextArea.setBounds(301, 55, 261, 213);
+		InventoryAdminGUI.add(videogameInventroyTextArea);
+		
 		JButton btnEditInventory = new JButton("Edit Inventory");
 		btnEditInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				movieInventoryTextArea.setText("");
+				movieInventoryTextArea.append(" ID "+"-"+" Title "+"-"+" Price "+"-"+" IsRented "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+				videogameInventroyTextArea.setText("");
+				videogameInventroyTextArea.append(" ID "+"-"+" Title "+"-"+" Price "+"-"+" IsRented "+System.getProperty("line.separator")+System.getProperty("line.separator"));
+				for (Movie mov : movieMap.values()){
+					movieInventoryTextArea.append(mov.getID()+"-"+mov.getTitle()+"-"+mov.getPrice()+"-"+String.valueOf(mov.getRentedStatus())+System.getProperty("line.separator"));
+				}
+				for (VideoGame vg : videogameMap.values()){
+					videogameInventroyTextArea.append(vg.getID()+"-"+vg.getTitle()+"-"+vg.getPrice()+"-"+String.valueOf(vg.getRentedStatus())+System.getProperty("line.separator"));
+				}
 				InventoryAdminGUI.setVisible(true);
 				AdminHomeGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
@@ -539,9 +563,28 @@ public class Redbox {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Action not implemented yet!!!");
-				
-				
+				if (userMap.containsKey(idTextBox.getText())){
+					int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?",null, JOptionPane.YES_NO_OPTION);
+					if(result == JOptionPane.YES_OPTION) {
+						userMap.remove(idTextBox.getText());
+						try {
+							rbMethods.returnUserMap(userMap);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						idTextBox.setText("");
+						AccountsGUI.setVisible(false);
+						AdminHomeGUI.setVisible(true);
+						frmWelcomeToRedbox.setTitle("Admin Home");
+						frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
+					} else
+						idTextBox.setText("");
+				}
+				else{
+					JOptionPane.showMessageDialog(null,"Invalid User");
+					idTextBox.setText("");
+				}
 			}
 		});
 		btnDelete.setBounds(352, 286, 106, 23);
@@ -564,6 +607,7 @@ public class Redbox {
 			public void actionPerformed(ActionEvent e) {
 				AccountDetailsAsAdminGUI.setVisible(false);
 				AccountsGUI.setVisible(true);
+				idTextBox.setText("");
 				frmWelcomeToRedbox.setTitle("Acounts");
 				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 			}
@@ -576,6 +620,7 @@ public class Redbox {
 			public void actionPerformed(ActionEvent e) {
 				AccountDetailsAsAdminGUI.setVisible(false);
 				AdminHomeGUI.setVisible(true);
+				idTextBox.setText("");
 				frmWelcomeToRedbox.setTitle("Admin Home");
 				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
 			}
@@ -587,32 +632,55 @@ public class Redbox {
 		lblCurrentInventory.setBounds(20, 11, 105, 14);
 		InventoryAdminGUI.add(lblCurrentInventory);
 		
-		JList DVDlist = new JList();
-		DVDlist.setBounds(20, 59, 225, 209);
-		InventoryAdminGUI.add(DVDlist);
-		
 		JButton btnAddItem = new JButton("Add Item");
 		btnAddItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addTypeGUI.setVisible(true);
-				InventoryAdminGUI.setVisible(false);
-				frmWelcomeToRedbox.setTitle("Type?");
-				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
-				
-				
-				
+//				addTypeGUI.setVisible(true);
+//				InventoryAdminGUI.setVisible(false);
+//				frmWelcomeToRedbox.setTitle("Type?");
+//				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
+				// Not implemented
 			}
 		});
 		btnAddItem.setBounds(403, 372, 105, 23);
 		InventoryAdminGUI.add(btnAddItem);
 		
+		editRemvoeID = new JTextField();
+		editRemvoeID.setBounds(117, 300, 105, 26);
+		InventoryAdminGUI.add(editRemvoeID);
+		editRemvoeID.setColumns(10);
+		
 		JButton btnRemoveItem = new JButton("Remove Item");
 		btnRemoveItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Action not implemented yet!!!");
-				
-				
-				
+				if (movieMap.containsKey(editRemvoeID.getText())||videogameMap.containsKey(editRemvoeID.getText())){
+					int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?",null, JOptionPane.YES_NO_OPTION);
+					if(result == JOptionPane.YES_OPTION) {
+						if (movieMap.containsKey(editRemvoeID.getText())){
+							movieMap.remove(editRemvoeID.getText());
+						}
+						if (videogameMap.containsKey(editRemvoeID.getText())){
+							videogameMap.remove(editRemvoeID.getText());
+						}
+						try {
+							rbMethods.returnMovieMap(movieMap);
+							rbMethods.returnVideoGameMap(videogameMap);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						editRemvoeID.setText("");
+						InventoryAdminGUI.setVisible(false);
+						AdminHomeGUI.setVisible(true);
+						frmWelcomeToRedbox.setTitle("Admin Home");
+						frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
+					} else
+						editRemvoeID.setText("");
+				}
+				else{
+					JOptionPane.showMessageDialog(null,"Invalid ID");
+					editRemvoeID.setText("");
+				}
 			}
 		});
 		btnRemoveItem.setBounds(385, 302, 123, 23);
@@ -637,10 +705,11 @@ public class Redbox {
 		JButton btnEditItem = new JButton("Edit Item");
 		btnEditItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InventoryAdminGUI.setVisible(false);
-				editItemGUI.setVisible(true);
-				frmWelcomeToRedbox.setTitle("Edit + 'getItemTitle()' maybe");
-				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
+//				InventoryAdminGUI.setVisible(false);
+//				editItemGUI.setVisible(true);
+//				frmWelcomeToRedbox.setTitle("Edit + 'getItemTitle()' maybe");
+//				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
+				//not implemented
 			}
 		});
 		btnEditItem.setBounds(252, 302, 105, 23);
@@ -650,10 +719,6 @@ public class Redbox {
 		lblDvd.setBounds(20, 34, 46, 14);
 		InventoryAdminGUI.add(lblDvd);
 		
-		JList GamesList = new JList();
-		GamesList.setBounds(291, 59, 225, 209);
-		InventoryAdminGUI.add(GamesList);
-		
 		JLabel lblGames = new JLabel("Games:");
 		lblGames.setBounds(291, 34, 46, 14);
 		InventoryAdminGUI.add(lblGames);
@@ -661,11 +726,6 @@ public class Redbox {
 		JLabel lblId_2 = new JLabel("I.D. ");
 		lblId_2.setBounds(81, 303, 69, 20);
 		InventoryAdminGUI.add(lblId_2);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(117, 300, 105, 26);
-		InventoryAdminGUI.add(textField_1);
-		textField_1.setColumns(10);
 		
 		JLabel lblChooseType = new JLabel("Choose type of item to add: ");
 		lblChooseType.setBounds(32, 44, 198, 14);
@@ -969,7 +1029,7 @@ public class Redbox {
 		JButton btnBackCancel = new JButton("Back/Cancel");
 		btnBackCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_1.setText(null);
+				editRemvoeID.setText(null);
 				InventoryAdminGUI.setVisible(true);
 				editItemGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Inventory");
@@ -1008,7 +1068,7 @@ public class Redbox {
 		NewUserGUI.add(lblEmail);
 		
 		JLabel lblAddress_1 = new JLabel("Address:");
-		lblAddress_1.setBounds(34, 138, 46, 14);
+		lblAddress_1.setBounds(34, 138, 75, 14);
 		NewUserGUI.add(lblAddress_1);
 		
 		JLabel lblCity_1 = new JLabel("City:");
@@ -1016,15 +1076,15 @@ public class Redbox {
 		NewUserGUI.add(lblCity_1);
 		
 		JLabel lblState_1 = new JLabel("State:");
-		lblState_1.setBounds(34, 188, 46, 14);
+		lblState_1.setBounds(34, 188, 64, 14);
 		NewUserGUI.add(lblState_1);
 		
 		JLabel lblZipcode = new JLabel("Zipcode:");
-		lblZipcode.setBounds(34, 213, 46, 14);
+		lblZipcode.setBounds(34, 213, 93, 14);
 		NewUserGUI.add(lblZipcode);
 		
 		JLabel lblStartingBalance = new JLabel("Starting Balance:");
-		lblStartingBalance.setBounds(34, 238, 93, 14);
+		lblStartingBalance.setBounds(34, 238, 100, 14);
 		NewUserGUI.add(lblStartingBalance);
 		
 		JLabel lblPassword_1 = new JLabel("Password:");
@@ -1441,15 +1501,24 @@ public class Redbox {
 		btnNewButton_1.setBounds(330, 132, 160, 23);
 		UserHomeGUI.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Return Movie or Game");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JTextArea userRenturnRentablesTextArea = new JTextArea();
+		userRenturnRentablesTextArea.setBounds(41, 58, 264, 84);
+		userRenturnRentablesTextArea.setEditable(false);
+		UserReturnGUI.add(userRenturnRentablesTextArea);
+		
+		JButton userReturnButton = new JButton("Return Movie or Game");
+		userReturnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				userRenturnRentablesTextArea.setText("");
+				for (RentableInterface ri1 : rentablesMap.values()){
+					userRenturnRentablesTextArea.append(ri1.getID()+"-"+ri1.getTitle()+"-"+ri1.getPrice()+System.getProperty("line.separator"));
+				}
 				UserReturnGUI.setVisible(true);
 				UserHomeGUI.setVisible(false);
 			}
 		});
-		btnNewButton_2.setBounds(330, 200, 160, 23);
-		UserHomeGUI.add(btnNewButton_2);
+		userReturnButton.setBounds(330, 200, 160, 23);
+		UserHomeGUI.add(userReturnButton);
 		
 		JButton btnNewButton_3 = new JButton("Log Off");
 		btnNewButton_3.addActionListener(new ActionListener() {
@@ -1783,36 +1852,59 @@ public class Redbox {
 		gbc_btnBack_4.gridy = 13;
 		UserAccountInfoGUI.add(btnBack_4, gbc_btnBack_4);
 				
-		JLabel label_16 = new JLabel("Rent Item I.D. ");
-		label_16.setBounds(43, 63, 203, 14);
-		UserReturnGUI.add(label_16);
+		JLabel userReturnLabel = new JLabel("Rent Item I.D. ");
+		userReturnLabel.setBounds(41, 153, 89, 14);
+		UserReturnGUI.add(userReturnLabel);
 		
-		textField_18 = new JTextField();
-		textField_18.setColumns(10);
-		textField_18.setBounds(143, 61, 164, 20);
-		UserReturnGUI.add(textField_18);
+		userReturnIDTextField = new JTextField();
+		userReturnIDTextField.setColumns(10);
+		userReturnIDTextField.setBounds(141, 151, 164, 20);
+		UserReturnGUI.add(userReturnIDTextField);
 		
 		JButton button_2 = new JButton("Cancel");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				userReturnIDTextField.setText("");
 				UserReturnGUI.setVisible(false);
 				UserHomeGUI.setVisible(true);
 			}
 		});
-		button_2.setBounds(140, 116, 89, 23);
+		button_2.setBounds(138, 206, 89, 23);
 		UserReturnGUI.add(button_2);
 		
-		JButton button_3 = new JButton("Return");
-		button_3.addActionListener(new ActionListener() {
+		JButton userReturnItemButton = new JButton("Return");
+		userReturnItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Action not implemented yet!!!");
+				rentablesMap = currentUser.returnRentables();
+				if (rentablesMap.containsKey(userReturnIDTextField.getText())){
+					if (rentablesMap.get(userReturnIDTextField.getText()).getClass().equals(Movie.class)){
+						movieMap.get(userReturnIDTextField.getText()).setRentedStatus(false);
+					}else if (rentablesMap.get(userReturnIDTextField.getText()).getClass().equals(VideoGame.class)){
+						videogameMap.get(userReturnIDTextField.getText()).setRentedStatus(false);
+					}
+					currentUser.rentRemove(rentablesMap.get(userReturnIDTextField.getText()));
+				}else{
+					JOptionPane.showMessageDialog(null, "Not a valid return item");
+				}
 				UserReturnGUI.setVisible(false);
 				UserHomeGUI.setVisible(true);
+				try {
+					rbMethods.returnMovieMap(movieMap);
+					rbMethods.returnVideoGameMap(videogameMap);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				userReturnIDTextField.setText("");
 			}
 		});
-		button_3.setBounds(38, 116, 89, 23);
-		UserReturnGUI.add(button_3);
+		userReturnItemButton.setBounds(36, 206, 89, 23);
+		UserReturnGUI.add(userReturnItemButton);
 		
+		JLabel lblCurrentRentables = new JLabel("Current Rentables:");
+		lblCurrentRentables.setBounds(41, 33, 264, 14);
+		UserReturnGUI.add(lblCurrentRentables);
+
 		JTextArea rentablesTextArea = new JTextArea();
 		rentablesTextArea.setBounds(56, 55, 245, 231);
 		rentablesTextArea.setEditable(false);
