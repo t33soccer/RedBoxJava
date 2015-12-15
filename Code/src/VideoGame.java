@@ -1,13 +1,20 @@
 
+
+
+/**
+ * Video Game Class which implements RentableInterface
+ *
+ */
 public class VideoGame implements RentableInterface {
 	
+	// Constructor to initialize interface attributes
 	public VideoGame(String inID, String inTitle, String inType, Double inPrice) {
 		this.setID(inID);
 		this.setTitle(inTitle);
 		this.setType(inType);
 		this.setPrice(inPrice);
 	}
-	
+	//Implemented interface methods
 	@Override
 	public String getID() {
 		return this.myRentID;
@@ -58,6 +65,7 @@ public class VideoGame implements RentableInterface {
 		this.myRentedStatus = setRentedStatus;
 	}
 	
+	//specific methods to Video Game Class
 	public Double getVideoGameRating(){
 		return this.videoGameRating;
 	}
@@ -90,6 +98,7 @@ public class VideoGame implements RentableInterface {
 		this.videoGamePlatform = setVideoGamePlatformString;
 	}
 	
+	// testing method to display class info
 	public void displayVideoGameInfo(){
 		System.out.println("My ID: "+this.getID());
 		System.out.println("My Title: "+this.getTitle());

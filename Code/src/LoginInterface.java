@@ -1,4 +1,4 @@
-
+//Interface for User and Admin classes
 public interface LoginInterface {
 	public String getID();
 	public void setID(String setIDString);

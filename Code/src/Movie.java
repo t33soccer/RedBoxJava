@@ -1,14 +1,18 @@
 
+/**
+ * Movie Class which implements the Rentable interface
+ *
+ */
 public class Movie implements RentableInterface {
 
-	
+	//Constructor for inherited attributes
 	public Movie(String inID, String inTitle, String inType, Double inPrice) {
 		this.setID(inID);
 		this.setTitle(inTitle);
 		this.setType(inType);
 		this.setPrice(inPrice);
 	}
-	
+	//inhertied methods from interface
 	@Override
 	public String getID() {
 		return this.myRentID;
@@ -59,6 +63,7 @@ public class Movie implements RentableInterface {
 		this.myRentedStatus = setRentedStatus;
 	}
 	
+	//methods specific to Movie Class
 	public Double getMovieRating(){
 		return this.myMovieRating;
 	}
@@ -90,7 +95,7 @@ public class Movie implements RentableInterface {
 	public void setMovieType(String setMovieTypeString){
 		this.myMovieType = setMovieTypeString;
 	}
-	
+	//method for testing Movie class
 	public void displayMovieInfo(){
 		System.out.println("My ID: "+this.getID());
 		System.out.println("My Title: "+this.getTitle());

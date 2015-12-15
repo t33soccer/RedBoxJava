@@ -1,17 +1,23 @@
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * User class inherited from the Login Interface
+ *
+ */
 public class User implements LoginInterface{
 	
+	//public constructor for interface attributes
 	public User(String myID, String myPassword){
 		this.userID = myID;
 		this.userPassword = myPassword;
 		currentRentables = new HashMap<String,RentableInterface>();
 	}
 	
+	//methods inherited from interface
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return this.userID;
 	}
 	@Override
@@ -42,6 +48,7 @@ public class User implements LoginInterface{
 		this.userAdminRights = setAdminRightsBool;
 	}
 	
+	//methods specific to user
 	public String getFirstName(){
 		return this.userFirstName;
 	}
@@ -113,7 +120,7 @@ public class User implements LoginInterface{
 	public void setBalance(Double setBalanceDouble){
 		this.userBalance = setBalanceDouble;
 	}
-	
+	//Map methods
 	public Map<String, RentableInterface> returnRentables(){
 		return this.currentRentables;
 	}
@@ -127,7 +134,7 @@ public class User implements LoginInterface{
 		myRentable.setRentedStatus(false);
 		currentRentables.remove(myRentable.getID());
 	}
-	
+	//method for testing User class
 	public void displayUserInfo(){
 		System.out.println("My ID: "+this.getID());
 		System.out.println("My First Name: "+this.getFirstName());
@@ -140,10 +147,11 @@ public class User implements LoginInterface{
 		System.out.println("My Phone Number: "+this.getPhoneNumber());
 		System.out.println("My Balance: "+this.getBalance());
 	}
-	
+	//interface attributes
 	private String userID;
 	private String userPassword;
 	private boolean userAdminRights;
+	//attributes specific to User
 	private String userFirstName;
 	private String userLastName;
 	private String userAddress;

@@ -14,8 +14,14 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+/**
+ * These are methods to complete functionality for the design
+ *
+ */
 public class GUIMethods {
 
+	//loads all known users
+	//creates a user for each user in file
 	public Map<String,User> loadUserAccountsMap() throws IOException{
 		Map<String,User> loginUserMap = new HashMap<String,User>();
 		
@@ -54,7 +60,7 @@ public class GUIMethods {
 		in.close();
 		return loginUserMap;
 	}
-	
+	//saves all known user from a loaded map
 	public void returnUserMap(Map<String,User> myMap) throws IOException{
 		File outFile = new File("C:\\Users\\Trey\\Documents\\GitHub\\RedBoxJava\\Code\\src\\userData.txt");
 		outFile.createNewFile();
@@ -173,7 +179,7 @@ public class GUIMethods {
 		outWriter.flush();
 		outWriter.close();
 	}
-	
+	//loads all known Movies into a movie hash map
 	public Map<String,Movie> loadMovieMap() throws NumberFormatException, IOException{
 		Map<String,Movie> movieMap = new HashMap<String,Movie>();
 		
@@ -194,7 +200,7 @@ public class GUIMethods {
 		in.close();
 		return movieMap;
 	}
-	
+	//returns all known movies given a movie map
 	public void returnMovieMap(Map<String,Movie> myMap) throws IOException{
 		File outFile = new File("C:\\Users\\Trey\\Documents\\GitHub\\RedBoxJava\\Code\\src\\movieData.txt");
 		outFile.createNewFile();
@@ -243,7 +249,7 @@ public class GUIMethods {
 		outWriter.flush();
 		outWriter.close();
 	}
-	
+	//loads all known video games from a file into hash map
 	public Map<String,VideoGame> loadVideoGameMap() throws NumberFormatException, IOException{
 		Map<String,VideoGame> videogameMap = new HashMap<String,VideoGame>();
 		
@@ -264,7 +270,7 @@ public class GUIMethods {
 		in.close();
 		return videogameMap;
 	}
-	
+	//returns all known video games from hash map to file
 	public void returnVideoGameMap(Map<String,VideoGame> myMap) throws IOException{
 		File outFile = new File("C:\\Users\\Trey\\Documents\\GitHub\\RedBoxJava\\Code\\src\\videogameData.txt");
 		outFile.createNewFile();
@@ -313,7 +319,7 @@ public class GUIMethods {
 		outWriter.flush();
 		outWriter.close();
 	}
-	
+	//creates a sorted list of user accounts
 	public ArrayList<User> sortAccounts(Map<String,User> myMap){
 		ArrayList<User> sortedList = new ArrayList<User>(myMap.values());
 		 Collections.sort(sortedList, new Comparator<User>() {
@@ -331,7 +337,7 @@ public class GUIMethods {
 		    });
 		return sortedList;
 	}
-	
+	//creates a sorted list of Movies by Title
 	public ArrayList<Movie> sortMovieByTitle(Map<String,Movie> myMap){
 		ArrayList<Movie> sortedList = new ArrayList<Movie>(myMap.values());
 		 Collections.sort(sortedList, new Comparator<Movie>() {
@@ -349,7 +355,7 @@ public class GUIMethods {
 		    });
 		return sortedList;
 	}
-	
+	//creates a sorted list of Movies by Category
 	public ArrayList<Movie> sortMovieByCategory(Map<String,Movie> myMap){
 		ArrayList<Movie> sortedList = new ArrayList<Movie>(myMap.values());
 		 Collections.sort(sortedList, new Comparator<Movie>() {
@@ -367,7 +373,7 @@ public class GUIMethods {
 		    });
 		return sortedList;
 	}
-	
+	//creates a sorted list of Movies by Rating
 	public ArrayList<Movie> sortMovieByRating(Map<String,Movie> myMap){
 		ArrayList<Movie> sortedList = new ArrayList<Movie>(myMap.values());
 		 Collections.sort(sortedList, new Comparator<Movie>() {
@@ -383,7 +389,7 @@ public class GUIMethods {
 		    });
 		return sortedList;
 	}
-	
+	//creates a sorted list of Video Games by Title
 	public ArrayList<VideoGame> sortVideoGameByTitle(Map<String,VideoGame> myMap){
 		ArrayList<VideoGame> sortedList = new ArrayList<VideoGame>(myMap.values());
 		 Collections.sort(sortedList, new Comparator<VideoGame>() {
@@ -401,7 +407,7 @@ public class GUIMethods {
 		    });
 		return sortedList;
 	}
-	
+	//creates a sorted list of Video Games by category
 	public ArrayList<VideoGame> sortVideoGameByCategory(Map<String,VideoGame> myMap){
 		ArrayList<VideoGame> sortedList = new ArrayList<VideoGame>(myMap.values());
 		 Collections.sort(sortedList, new Comparator<VideoGame>() {
@@ -419,7 +425,7 @@ public class GUIMethods {
 		    });
 		return sortedList;
 	}
-	
+	//creates a sorted list of Video Games by Rating
 	public ArrayList<VideoGame> sortVideoGameByRating(Map<String,VideoGame> myMap){
 		ArrayList<VideoGame> sortedList = new ArrayList<VideoGame>(myMap.values());
 		 Collections.sort(sortedList, new Comparator<VideoGame>() {

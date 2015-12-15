@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+
+//A testing class to test each created class
 public class TestClass {
 
 	public static void main(String[] args) throws IOException {

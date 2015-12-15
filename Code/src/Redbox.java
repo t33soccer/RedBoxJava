@@ -26,6 +26,12 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
 
+
+
+/**
+ * This is the auto-generated GUI from the Eclipse GUI Creator Tool
+ *
+ */
 public class Redbox {
 
 	private JFrame frmWelcomeToRedbox;

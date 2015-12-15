@@ -1,4 +1,4 @@
-
+//Interface for Movies and Video Games
 public interface RentableInterface {
 	public String getID();
 	public void setID(String setIDString);
