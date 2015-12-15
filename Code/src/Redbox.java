@@ -53,8 +53,8 @@ public class Redbox {
 	private JTextField balanceTextField;
 	private JTextField passwordTextField;
 	private JTextField checkPasswordTextField;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField rentItemIDTextField;
+	private JTextField rentUserIDTextField;
 	private JPanel RedBox;
 	private JPanel AccountsGUI;
 	private JPanel AdminHomeGUI;
@@ -273,20 +273,35 @@ public class Redbox {
 		final JButton btnRentGettype = new JButton("Rent getType()");
 		btnRentGettype.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (movieMap.containsKey(rentableIDTextField.getText())){
-					if (movieMap.get(rentableIDTextField.getText()).getRentedStatus()){
-						JOptionPane.showMessageDialog(null, "Movie Already Rented");
-						rentableIDTextField.setText("");
+				if (currentRentable == "Movie"){
+					if (movieMap.containsKey(rentableIDTextField.getText())){
+						if (movieMap.get(rentableIDTextField.getText()).getRentedStatus()){
+							JOptionPane.showMessageDialog(null, "Movie Already Rented");
+							rentableIDTextField.setText("");
+						}
+						else{
+							currentUser.rentAdd(movieMap.get(rentableIDTextField.getText()));
+							rentableIDTextField.setText("");
+							ViewRentablesGUI.setVisible(false);
+							RentByGUI.setVisible(true);
+						}
 					}
-					else{
-						currentUser.rentAdd(movieMap.get(rentableIDTextField.getText()));
-						rentableIDTextField.setText("");
-						ViewRentablesGUI.setVisible(false);
-						RentByGUI.setVisible(true);
+				}else if (currentRentable == "VideoGame"){
+					if (videogameMap.containsKey(rentableIDTextField.getText())){
+						if (videogameMap.get(rentableIDTextField.getText()).getRentedStatus()){
+							JOptionPane.showMessageDialog(null, "Video Game Already Rented");
+							rentableIDTextField.setText("");
+						}
+						else{
+							currentUser.rentAdd(videogameMap.get(rentableIDTextField.getText()));
+							rentableIDTextField.setText("");
+							ViewRentablesGUI.setVisible(false);
+							RentByGUI.setVisible(true);
+						}
 					}
 				}
 			}
-		}); 
+		});
 		btnRentGettype.setBounds(152, 322, 149, 23);
 		ViewRentablesGUI.add(btnRentGettype);
 		
@@ -1217,34 +1232,32 @@ public class Redbox {
 		NewUserGUI.add(lblPhoneNumber);
 		
 		JLabel lblRentedItemId = new JLabel("Rent Item I.D. ");
-		lblRentedItemId.setBounds(52, 37, 203, 14);
+		lblRentedItemId.setBounds(52, 37, 128, 14);
 		ReturnGUI.add(lblRentedItemId);
 		
 		JLabel lblUsername_3 = new JLabel("Username:");
 		lblUsername_3.setBounds(52, 75, 164, 14);
 		ReturnGUI.add(lblUsername_3);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(195, 34, 164, 20);
-		ReturnGUI.add(textField_5);
-		textField_5.setColumns(10);
+		rentItemIDTextField = new JTextField();
+		rentItemIDTextField.setBounds(195, 34, 164, 20);
+		ReturnGUI.add(rentItemIDTextField);
+		rentItemIDTextField.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(195, 72, 164, 20);
-		ReturnGUI.add(textField_6);
-		textField_6.setColumns(10);
+		rentUserIDTextField = new JTextField();
+		rentUserIDTextField.setBounds(195, 72, 164, 20);
+		ReturnGUI.add(rentUserIDTextField);
+		rentUserIDTextField.setColumns(10);
 		
 		JButton btnCancel_1 = new JButton("Cancel");
 		btnCancel_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				rentItemIDTextField.setText("");
+				rentUserIDTextField.setText("");
 				RedBox.setVisible(true);
 				ReturnGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Welcome to RedBox!");
 				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
-				
-				
-				
-				
 			}
 		});
 		btnCancel_1.setBounds(52, 142, 89, 23);
@@ -1253,14 +1266,31 @@ public class Redbox {
 		JButton btnReturn = new JButton("Return");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				User tempReturnUser;
+				Map<String,RentableInterface> tempReturnMap;
+				if (userMap.containsKey(rentUserIDTextField.getText())){
+					tempReturnUser = userMap.get(rentUserIDTextField.getText());
+					tempReturnMap = tempReturnUser.returnRentables();
+					if (tempReturnMap.containsKey(rentItemIDTextField.getText())){
+						if (tempReturnMap.get(rentItemIDTextField.getText()).getClass().equals(Movie.class)){
+							movieMap.get(rentItemIDTextField.getText()).setRentedStatus(false);
+						}
+						if (tempReturnMap.get(rentItemIDTextField.getText()).getClass().equals(VideoGame.class)){
+							videogameMap.get(rentItemIDTextField.getText()).setRentedStatus(false);
+						}
+						tempReturnUser.rentRemove(tempReturnMap.get(rentItemIDTextField.getText()));
+					}else{
+						JOptionPane.showMessageDialog(null, "Invalid ID");
+					}
+				}else{
+					JOptionPane.showMessageDialog(null, "Invalid User");
+				}
+				rentItemIDTextField.setText("");
+				rentUserIDTextField.setText("");
 				RedBox.setVisible(true);
 				ReturnGUI.setVisible(false);
 				frmWelcomeToRedbox.setTitle("Welcome to RedBox!");
 				frmWelcomeToRedbox.setExtendedState(Frame.MAXIMIZED_BOTH);
-				
-				
-				
-				
 			}
 		});
 		btnReturn.setBounds(270, 142, 89, 23);
